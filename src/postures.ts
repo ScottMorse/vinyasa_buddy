@@ -1,0 +1,1842 @@
+import type { StickFigurePosition } from './stickFigurePosition';
+
+export interface PostureMetadata {
+  id: string;
+  name: string;
+  sanskritName: string;
+  cues: string[];
+  adjustments: string[];
+  stickFigurePosition: Partial<StickFigurePosition>;
+  transitionOnly?: boolean;
+}
+
+const POSTURE_MAP = {
+  child: {
+    id: 'child',
+    name: "Child's Pose",
+    sanskritName: 'Bālāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: 20,
+      },
+      neck: {
+        chestAngle: 20,
+      },
+      chest: {
+        abdomenAngle: 20,
+      },
+      abdomen: {
+        hipAngle: 75,
+      },
+      leftUpperArm: {
+        shoulderAngle: -70,
+      },
+      leftLowerArm: {
+        elbowAngle: 4,
+      },
+      rightUpperArm: {
+        shoulderAngle: -110,
+      },
+      rightLowerArm: {
+        elbowAngle: -2,
+      },
+      leftUpperLeg: {
+        hipAngle: 75,
+      },
+      leftLowerLeg: {
+        kneeAngle: 160,
+      },
+      rightUpperLeg: {
+        hipAngle: -73,
+      },
+      rightLowerLeg: {
+        kneeAngle: -160,
+      },
+    },
+  },
+  tabletop: {
+    id: 'tabletop',
+    name: 'Tabletop',
+    sanskritName: 'Cakravākāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 90,
+      },
+      leftLowerLeg: {
+        kneeAngle: 90,
+      },
+      rightLowerLeg: {
+        kneeAngle: -90,
+      },
+      rightUpperArm: {
+        shoulderAngle: 180,
+      },
+    },
+  },
+  cat: {
+    id: 'cat',
+    name: 'Cat',
+    sanskritName: 'Mārjarīāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      neck: {
+        chestAngle: 20,
+      },
+      chest: {
+        abdomenAngle: 60,
+      },
+      abdomen: {
+        hipAngle: 60,
+      },
+      leftLowerLeg: {
+        kneeAngle: 90,
+      },
+      rightLowerLeg: {
+        kneeAngle: -90,
+      },
+      leftUpperArm: {
+        shoulderAngle: -30,
+      },
+      rightUpperArm: {
+        shoulderAngle: 210,
+      },
+    },
+  },
+  cow: {
+    id: 'cow',
+    name: 'Cow',
+    sanskritName: 'Biḍālāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      neck: {
+        chestAngle: -15,
+      },
+      chest: {
+        abdomenAngle: -40,
+      },
+      abdomen: {
+        hipAngle: 110,
+      },
+      leftLowerLeg: {
+        kneeAngle: 90,
+      },
+      rightLowerLeg: {
+        kneeAngle: -90,
+      },
+      leftUpperArm: {
+        shoulderAngle: 20,
+      },
+      rightUpperArm: {
+        shoulderAngle: 160,
+      },
+    },
+  },
+  downwardDog: {
+    id: 'downwardDog',
+    name: 'Downward Facing Dog',
+    sanskritName: 'Adho Mukha Svanāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 137,
+      },
+      leftLowerLeg: {
+        kneeAngle: 60,
+      },
+      rightLowerLeg: {
+        kneeAngle: -60,
+      },
+      leftUpperArm: {
+        shoulderAngle: -80,
+      },
+      rightUpperArm: {
+        shoulderAngle: 260,
+      },
+      leftLowerArm: {
+        elbowAngle: 10,
+      },
+      rightLowerArm: {
+        elbowAngle: -10,
+      },
+    },
+  },
+  downwardDogGaze: {
+    id: 'downwardDogGaze',
+    name: 'Downward Facing Dog - Gaze Forward',
+    sanskritName: 'Adho Mukha Svanāsana',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 122,
+      },
+      leftLowerLeg: {
+        kneeAngle: 60,
+      },
+      rightLowerLeg: {
+        kneeAngle: -60,
+      },
+      leftUpperArm: {
+        shoulderAngle: -40,
+      },
+      rightUpperArm: {
+        shoulderAngle: 220,
+      },
+      leftLowerArm: {
+        elbowAngle: 10,
+      },
+      rightLowerArm: {
+        elbowAngle: -10,
+      },
+    },
+  },
+  ragdoll: {
+    id: 'ragdoll',
+    name: 'Ragdoll (Forward Fold Variation)',
+    sanskritName: 'Uttānāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      neck: {
+        chestAngle: 25,
+      },
+      abdomen: {
+        hipAngle: 130,
+      },
+      chest: {
+        abdomenAngle: 20,
+      },
+      leftUpperLeg: {
+        hipAngle: 10,
+      },
+      rightUpperLeg: {
+        hipAngle: -10,
+      },
+      leftLowerLeg: {
+        kneeAngle: 15,
+      },
+      rightLowerLeg: {
+        kneeAngle: -15,
+      },
+      leftUpperArm: {
+        shoulderAngle: -50,
+      },
+      rightUpperArm: {
+        shoulderAngle: 230,
+      },
+      leftLowerArm: {
+        elbowAngle: -5,
+      },
+    },
+  },
+  rollSpine: {
+    id: 'rollSpine',
+    name: 'Roll up the Spine',
+    sanskritName: '',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      neck: {
+        chestAngle: 25,
+      },
+      abdomen: {
+        hipAngle: 0,
+      },
+      chest: {
+        abdomenAngle: 20,
+      },
+      leftUpperLeg: {
+        hipAngle: 10,
+      },
+      rightUpperLeg: {
+        hipAngle: -5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 10,
+      },
+      rightLowerLeg: {
+        kneeAngle: -10,
+      },
+      leftUpperArm: {
+        shoulderAngle: 40,
+      },
+      rightUpperArm: {
+        shoulderAngle: 130,
+      },
+      leftLowerArm: {
+        elbowAngle: -5,
+      },
+    },
+  },
+  mountain: {
+    id: 'mountain',
+    name: 'Mountain',
+    sanskritName: 'Tāḍāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      rightUpperArm: {
+        shoulderAngle: 80,
+      },
+      rightLowerArm: {
+        elbowAngle: 10,
+      },
+      leftUpperArm: {
+        shoulderAngle: 80,
+      },
+      leftLowerArm: {
+        elbowAngle: 10,
+      },
+    },
+  },
+  mountainExt: {
+    id: 'mountainExt',
+    name: 'Extended Mountain',
+    sanskritName: 'Ūrdhva Hastāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      rightUpperArm: {
+        shoulderAngle: -40,
+      },
+      rightLowerArm: {
+        elbowAngle: 40,
+      },
+      leftUpperArm: {
+        shoulderAngle: -40,
+      },
+      leftLowerArm: {
+        elbowAngle: 40,
+      },
+    },
+  },
+  attention: {
+    id: 'attention',
+    name: 'Attention',
+    sanskritName: 'Samasthiti',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      rightUpperArm: {
+        shoulderAngle: 30,
+      },
+      rightLowerArm: {
+        elbowAngle: -120,
+      },
+      leftUpperArm: {
+        shoulderAngle: 30,
+      },
+      leftLowerArm: {
+        elbowAngle: -120,
+      },
+    },
+  },
+  forwardFold: {
+    id: 'forwardFold',
+    name: 'Forward Fold',
+    sanskritName: 'Uttānāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      neck: {
+        chestAngle: 25,
+      },
+      abdomen: {
+        hipAngle: 140,
+      },
+      chest: {
+        abdomenAngle: 20,
+      },
+      leftUpperLeg: {
+        hipAngle: 10,
+      },
+      rightUpperLeg: {
+        hipAngle: -10,
+      },
+      leftLowerLeg: {
+        kneeAngle: 10,
+      },
+      rightLowerLeg: {
+        kneeAngle: -10,
+      },
+      leftUpperArm: {
+        shoulderAngle: -70,
+      },
+      rightUpperArm: {
+        shoulderAngle: -110,
+      },
+      leftLowerArm: {
+        elbowAngle: -5,
+      },
+    },
+  },
+  halfwayLift: {
+    id: 'halfwayLift',
+    name: 'Halfway Lift',
+    sanskritName: 'Ardha Uttānāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 90,
+      },
+      chest: {
+        abdomenAngle: 2,
+      },
+      leftUpperLeg: {
+        hipAngle: 5,
+      },
+      rightUpperLeg: {
+        hipAngle: -5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 5,
+      },
+      rightLowerLeg: {
+        kneeAngle: -5,
+      },
+      leftUpperArm: {
+        shoulderAngle: 70,
+      },
+      rightUpperArm: {
+        shoulderAngle: 110,
+      },
+      leftLowerArm: {
+        elbowAngle: 5,
+      },
+      rightLowerArm: {
+        elbowAngle: -10,
+      },
+    },
+  },
+  plank: {
+    id: 'plank',
+    name: 'Plank',
+    sanskritName: 'Kumbhakasana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 80,
+      },
+      leftUpperLeg: {
+        hipAngle: -65,
+      },
+      rightUpperLeg: {
+        hipAngle: 65,
+      },
+      leftLowerLeg: {
+        kneeAngle: 3,
+      },
+      rightLowerLeg: {
+        kneeAngle: -3,
+      },
+      rightUpperArm: {
+        shoulderAngle: 180,
+      },
+      leftLowerArm: {
+        elbowAngle: 5,
+      },
+      rightLowerArm: {
+        elbowAngle: -5,
+      },
+    },
+  },
+  lowPlank: {
+    id: 'lowPlank',
+    name: 'Low Plank (Lower to Belly)',
+    sanskritName: 'Chaturanga',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 90,
+      },
+      leftUpperLeg: {
+        hipAngle: -75,
+      },
+      rightUpperLeg: {
+        hipAngle: 75,
+      },
+      leftLowerLeg: {
+        kneeAngle: 3,
+      },
+      rightLowerLeg: {
+        kneeAngle: -3,
+      },
+      leftUpperArm: {
+        shoulderAngle: 90,
+      },
+      rightUpperArm: {
+        shoulderAngle: 90,
+      },
+      leftLowerArm: {
+        elbowAngle: 90,
+      },
+      rightLowerArm: {
+        elbowAngle: -90,
+      },
+    },
+  },
+  cobra: {
+    id: 'cobra',
+    name: 'Cobra',
+    sanskritName: 'Bhujaṅgāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      neck: {
+        chestAngle: -10,
+      },
+      chest: {
+        abdomenAngle: -15,
+      },
+      abdomen: {
+        hipAngle: 70,
+      },
+      leftUpperLeg: {
+        hipAngle: -85,
+      },
+      rightUpperLeg: {
+        hipAngle: 85,
+      },
+      leftLowerLeg: {
+        kneeAngle: 5,
+      },
+      rightLowerLeg: {
+        kneeAngle: -5,
+      },
+      leftUpperArm: {
+        shoulderAngle: 70,
+      },
+      rightUpperArm: {
+        shoulderAngle: 110,
+      },
+      leftLowerArm: {
+        elbowAngle: 110,
+      },
+      rightLowerArm: {
+        elbowAngle: -110,
+      },
+    },
+  },
+  upwardDog: {
+    id: 'upwardDog',
+    name: 'Upward Facing Dog',
+    sanskritName: 'Ūrdhva Mukha Śvanāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      neck: {
+        chestAngle: -10,
+      },
+      chest: {
+        abdomenAngle: -30,
+      },
+      abdomen: {
+        hipAngle: 50,
+      },
+      leftUpperLeg: {
+        hipAngle: -85,
+      },
+      rightUpperLeg: {
+        hipAngle: 85,
+      },
+      leftUpperArm: {
+        shoulderAngle: 70,
+      },
+      rightUpperArm: {
+        shoulderAngle: 110,
+      },
+      leftLowerArm: {
+        elbowAngle: 5,
+      },
+      rightLowerArm: {
+        elbowAngle: -5,
+      },
+    },
+  },
+  chair: {
+    id: 'chair',
+    name: 'Chair',
+    sanskritName: 'Utkaṭāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 30,
+      },
+      leftUpperLeg: {
+        hipAngle: 30,
+      },
+      rightUpperLeg: {
+        hipAngle: -30,
+      },
+      leftLowerLeg: {
+        kneeAngle: 60,
+      },
+      rightLowerLeg: {
+        kneeAngle: -60,
+      },
+      leftUpperArm: {
+        shoulderAngle: -80,
+      },
+      rightUpperArm: {
+        shoulderAngle: -80,
+      },
+      leftLowerArm: {
+        elbowAngle: 5,
+      },
+      rightLowerArm: {
+        elbowAngle: 5,
+      },
+    },
+  },
+  threeLeggedDog: {
+    id: 'threeLeggedDog',
+    name: 'Three-Legged Downward Dog',
+    sanskritName: 'Eka Pāda Adho Mukha Śvānāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 137,
+      },
+      rightUpperLeg: {
+        hipAngle: 120,
+      },
+      leftLowerLeg: {
+        kneeAngle: 60,
+      },
+      rightLowerLeg: {
+        kneeAngle: -10,
+      },
+      leftUpperArm: {
+        shoulderAngle: -80,
+      },
+      rightUpperArm: {
+        shoulderAngle: 260,
+      },
+      leftLowerArm: {
+        elbowAngle: 10,
+      },
+      rightLowerArm: {
+        elbowAngle: -10,
+      },
+    },
+  },
+  threeLeggedDogCue: {
+    id: 'threeLeggedDogCue',
+    name: 'Extend leg, Square Hips (3-Legged Dog)',
+    sanskritName: 'Eka Pāda Adho Mukha Śvānāsana',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 137,
+      },
+      rightUpperLeg: {
+        hipAngle: 120,
+      },
+      leftLowerLeg: {
+        kneeAngle: 60,
+      },
+      rightLowerLeg: {
+        kneeAngle: -10,
+      },
+      leftUpperArm: {
+        shoulderAngle: -80,
+      },
+      rightUpperArm: {
+        shoulderAngle: 260,
+      },
+      leftLowerArm: {
+        elbowAngle: 10,
+      },
+      rightLowerArm: {
+        elbowAngle: -10,
+      },
+    },
+  },
+  lunge: {
+    id: 'lunge',
+    name: 'Lunge',
+    sanskritName: 'Āñjaneyāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 80,
+      },
+      chest: {
+        abdomenAngle: 5,
+      },
+      leftUpperLeg: {
+        hipAngle: 90,
+      },
+      rightUpperLeg: {
+        hipAngle: 60,
+      },
+      leftLowerLeg: {
+        kneeAngle: 85,
+      },
+      rightLowerLeg: {
+        kneeAngle: -3,
+      },
+      leftUpperArm: {
+        shoulderAngle: 5,
+      },
+      rightUpperArm: {
+        shoulderAngle: 175,
+      },
+      leftLowerArm: {
+        elbowAngle: 5,
+      },
+      rightLowerArm: {
+        elbowAngle: -5,
+      },
+    },
+  },
+  warrior2: {
+    id: 'warrior2',
+    name: 'Warrior 2',
+    sanskritName: 'Vīrabhadrāsana II',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      leftUpperLeg: {
+        hipAngle: 70,
+      },
+      rightUpperLeg: {
+        hipAngle: 47.5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 65,
+      },
+    },
+  },
+  warrior2Hold: {
+    id: 'warrior2Hold',
+    name: 'Hold',
+    sanskritName: '',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      leftUpperLeg: {
+        hipAngle: 70,
+      },
+      rightUpperLeg: {
+        hipAngle: 47.5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 65,
+      },
+    },
+  },
+  warrior2Sink: {
+    id: 'warrior2',
+    name: 'Warrior 2 (Sink Down)',
+    sanskritName: 'Vīrabhadrāsana II',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      leftUpperLeg: {
+        hipAngle: 80,
+      },
+      rightUpperLeg: {
+        hipAngle: 55,
+      },
+      leftLowerLeg: {
+        kneeAngle: 75,
+      },
+    },
+  },
+  warrior2Reach: {
+    id: 'warrior2Reach',
+    name: 'Warrior II (Reach Forward)',
+    sanskritName: 'Vīrabhadrāsana II',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      neck: {
+        chestAngle: -5,
+      },
+      chest: {
+        abdomenAngle: 5,
+      },
+      abdomen: {
+        hipAngle: 20,
+      },
+      leftUpperLeg: {
+        hipAngle: 80,
+      },
+      rightUpperLeg: {
+        hipAngle: 55,
+      },
+      leftLowerLeg: {
+        kneeAngle: 75,
+      },
+      leftUpperArm: {
+        shoulderAngle: -25,
+      },
+      rightUpperArm: {
+        shoulderAngle: 25,
+      },
+    },
+  },
+  warrior2Straighten: {
+    id: 'warrior2Straighten',
+    name: 'Straighten Knee',
+    sanskritName: 'Vīrabhadrāsana II',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      leftUpperLeg: {
+        hipAngle: 50,
+      },
+      rightUpperLeg: {
+        hipAngle: 47.5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 5,
+      },
+    },
+  },
+  warrior2StraightReach: {
+    id: 'warrior2StraightReach',
+    name: 'Reach Forward',
+    sanskritName: 'Vīrabhadrāsana II',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      neck: {
+        chestAngle: -5,
+      },
+      chest: {
+        abdomenAngle: 5,
+      },
+      abdomen: {
+        hipAngle: 20,
+      },
+      leftUpperLeg: {
+        hipAngle: 50,
+      },
+      rightUpperLeg: {
+        hipAngle: 47.5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 5,
+      },
+
+      leftUpperArm: {
+        shoulderAngle: -25,
+      },
+      rightUpperArm: {
+        shoulderAngle: 25,
+      },
+    },
+  },
+  sideAngle: {
+    id: 'sideAngle',
+    name: 'Extended Side Angle',
+    sanskritName: 'Utthita Pārśvakoṇāsana',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 30,
+      },
+      leftUpperLeg: {
+        hipAngle: 80,
+      },
+      rightUpperLeg: {
+        hipAngle: 55,
+      },
+      leftLowerLeg: {
+        kneeAngle: 75,
+      },
+      leftUpperArm: {
+        shoulderAngle: 60,
+      },
+      rightUpperArm: {
+        shoulderAngle: -60,
+      },
+    },
+  },
+  reverseWarrior: {
+    id: 'reverseWarrior',
+    name: 'Reverse Warrior',
+    sanskritName: 'Viparīta Vīrabhadrāsana',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      neck: {
+        chestAngle: -5,
+      },
+      chest: {
+        abdomenAngle: -5,
+      },
+      leftUpperLeg: {
+        hipAngle: 80,
+      },
+      rightUpperLeg: {
+        hipAngle: 50,
+      },
+      leftLowerLeg: {
+        kneeAngle: 75,
+      },
+      rightLowerLeg: {
+        kneeAngle: -10,
+      },
+      leftUpperArm: {
+        shoulderAngle: -80,
+      },
+      rightUpperArm: {
+        shoulderAngle: 80,
+      },
+      leftLowerArm: {
+        elbowAngle: 7,
+      },
+    },
+  },
+  reclinedBoundSitUp: {
+    id: 'reclinedBoundSitUp',
+    name: 'Reclined Bound Angle Sit Ups',
+    sanskritName: 'Supta Baddha Koṇāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: -10,
+      },
+      neck: {
+        chestAngle: -10,
+      },
+      chest: {
+        abdomenAngle: -10,
+      },
+      abdomen: {
+        hipAngle: 90,
+      },
+      leftUpperLeg: {
+        hipAngle: -120,
+      },
+      rightUpperLeg: {
+        hipAngle: 120,
+      },
+      leftLowerLeg: {
+        kneeAngle: -60,
+      },
+      rightLowerLeg: {
+        kneeAngle: 60,
+      },
+      leftUpperArm: {
+        shoulderAngle: -70,
+      },
+      rightUpperArm: {
+        shoulderAngle: -110,
+      },
+      leftLowerArm: {
+        elbowAngle: 60,
+      },
+      rightLowerArm: {
+        elbowAngle: -60,
+      },
+    },
+  },
+  bicycle: {
+    id: 'bicycle',
+    name: 'Bicycles',
+    sanskritName: '',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: -10,
+      },
+      neck: {
+        chestAngle: -10,
+      },
+      chest: {
+        abdomenAngle: -10,
+      },
+      abdomen: {
+        hipAngle: 80,
+      },
+      leftUpperLeg: {
+        hipAngle: -92,
+      },
+      rightUpperLeg: {
+        hipAngle: 175,
+      },
+      leftLowerLeg: {
+        kneeAngle: -2,
+      },
+      rightLowerLeg: {
+        kneeAngle: 90,
+      },
+      leftUpperArm: {
+        shoulderAngle: -190,
+      },
+      rightUpperArm: {
+        shoulderAngle: -140,
+      },
+      leftLowerArm: {
+        elbowAngle: -120,
+      },
+      rightLowerArm: {
+        elbowAngle: -100,
+      },
+    },
+  },
+  boat: {
+    id: 'boat',
+    name: 'Boat',
+    sanskritName: 'Nāvāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: -10,
+      },
+      neck: {
+        chestAngle: -10,
+      },
+      chest: {
+        abdomenAngle: -20,
+      },
+      abdomen: {
+        hipAngle: 50,
+      },
+      leftUpperLeg: {
+        hipAngle: -175,
+      },
+      rightUpperLeg: {
+        hipAngle: 175,
+      },
+      leftLowerLeg: {
+        kneeAngle: -90,
+      },
+      rightLowerLeg: {
+        kneeAngle: 90,
+      },
+      leftUpperArm: {
+        shoulderAngle: 140,
+      },
+      rightUpperArm: {
+        shoulderAngle: 45,
+      },
+      leftLowerArm: {
+        elbowAngle: -30,
+      },
+      rightLowerArm: {
+        elbowAngle: 40,
+      },
+    },
+  },
+  bridge: {
+    id: 'bridge',
+    name: 'Bridge',
+    sanskritName: 'Setu Bandha Sarvāṅgāsana/Setu Bandhāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: -50,
+      },
+      neck: {
+        chestAngle: -20,
+      },
+      chest: {
+        abdomenAngle: -5,
+      },
+      abdomen: {
+        hipAngle: 120,
+      },
+      leftUpperLeg: {
+        hipAngle: -120,
+      },
+      rightUpperLeg: {
+        hipAngle: 120,
+      },
+      leftLowerLeg: {
+        kneeAngle: -120,
+      },
+      rightLowerLeg: {
+        kneeAngle: 120,
+      },
+      leftUpperArm: {
+        shoulderAngle: 60,
+      },
+      rightUpperArm: {
+        shoulderAngle: 120,
+      },
+      leftLowerArm: {
+        elbowAngle: 0,
+      },
+      rightLowerArm: {
+        elbowAngle: 0,
+      },
+    },
+  },
+  crescentLunge: {
+    id: 'crescentLunge',
+    name: 'Crescent Lunge',
+    sanskritName: 'Āñjaneyāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      leftUpperLeg: {
+        hipAngle: 70,
+      },
+      rightUpperLeg: {
+        hipAngle: 37.5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 65,
+      },
+      rightLowerLeg: {
+        kneeAngle: -20,
+      },
+      rightUpperArm: {
+        shoulderAngle: -40,
+      },
+      rightLowerArm: {
+        elbowAngle: 40,
+      },
+      leftUpperArm: {
+        shoulderAngle: -40,
+      },
+      leftLowerArm: {
+        elbowAngle: 40,
+      },
+    },
+  },
+  revolvedCrescentLunge: {
+    id: 'revolvedCrescentLunge',
+    name: 'Revolved Crescent Lunge',
+    sanskritName: 'Parivṛtta Āñjaneyāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 80,
+      },
+      leftUpperLeg: {
+        hipAngle: 70,
+      },
+      rightUpperLeg: {
+        hipAngle: 37.5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 65,
+      },
+      rightLowerLeg: {
+        kneeAngle: -20,
+      },
+      rightUpperArm: {
+        shoulderAngle: 20,
+      },
+      rightLowerArm: {
+        elbowAngle: -155,
+      },
+      leftUpperArm: {
+        shoulderAngle: 20,
+      },
+      leftLowerArm: {
+        elbowAngle: -150,
+      },
+    },
+  },
+  lizardLunge: {
+    id: 'lizardLunge',
+    name: 'Lizard Lunge',
+    sanskritName: 'Utthan Pristhasana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      chest: {
+        abdomenAngle: 2,
+      },
+      abdomen: {
+        hipAngle: 80,
+      },
+      leftUpperLeg: {
+        hipAngle: -77.5,
+      },
+      rightUpperLeg: {
+        hipAngle: -130,
+      },
+      leftLowerLeg: {
+        kneeAngle: 5,
+      },
+      rightLowerLeg: {
+        kneeAngle: -120,
+      },
+      leftUpperArm: {
+        shoulderAngle: 10,
+      },
+      rightUpperArm: {
+        shoulderAngle: 170,
+      },
+      leftLowerArm: {
+        elbowAngle: 90,
+      },
+      rightLowerArm: {
+        elbowAngle: -90,
+      },
+    },
+  },
+  sidePlank: {
+    id: 'sidePlank',
+    name: 'Side Plank',
+    sanskritName: 'Vasiṣṭhāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 70,
+      },
+      leftUpperLeg: {
+        hipAngle: -70,
+      },
+      rightUpperLeg: {
+        hipAngle: 73,
+      },
+      leftLowerLeg: {
+        kneeAngle: 3,
+      },
+      rightLowerLeg: {
+        kneeAngle: 3,
+      },
+      rightUpperArm: {
+        shoulderAngle: -10,
+      },
+      leftUpperArm: {
+        shoulderAngle: 10,
+      },
+      leftLowerArm: {
+        elbowAngle: 5,
+      },
+      rightLowerArm: {
+        elbowAngle: 2,
+      },
+    },
+  },
+  eagle: {
+    id: 'eagle',
+    name: 'Eagle',
+    sanskritName: 'Garuḍāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 20,
+      },
+      leftUpperLeg: {
+        hipAngle: 30,
+      },
+      rightUpperLeg: {
+        hipAngle: -40,
+      },
+      leftLowerLeg: {
+        kneeAngle: 60,
+      },
+      rightLowerLeg: {
+        kneeAngle: -72,
+      },
+      leftUpperArm: {
+        shoulderAngle: -25,
+      },
+      rightUpperArm: {
+        shoulderAngle: -150,
+      },
+      leftLowerArm: {
+        elbowAngle: 80,
+      },
+      rightLowerArm: {
+        elbowAngle: -65,
+      },
+    },
+  },
+  gorilla: {
+    id: 'gorilla',
+    name: 'Gorilla',
+    sanskritName: 'Pādahastāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      neck: {
+        chestAngle: 25,
+      },
+      abdomen: {
+        hipAngle: 150,
+      },
+      chest: {
+        abdomenAngle: 15,
+      },
+      leftUpperLeg: {
+        hipAngle: 5,
+      },
+      rightUpperLeg: {
+        hipAngle: -5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 10,
+      },
+      rightLowerLeg: {
+        kneeAngle: -10,
+      },
+      leftUpperArm: {
+        shoulderAngle: -70,
+      },
+      rightUpperArm: {
+        shoulderAngle: -110,
+      },
+      leftLowerArm: {
+        elbowAngle: -20,
+      },
+      rightLowerArm: {
+        elbowAngle: 20,
+      },
+    },
+  },
+
+  crow: {
+    id: 'crow',
+    name: 'Crow',
+    sanskritName: 'Bakāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 90,
+      },
+      leftUpperLeg: {
+        hipAngle: 70,
+      },
+      rightUpperLeg: {
+        hipAngle: -70,
+      },
+      leftLowerLeg: {
+        kneeAngle: 160,
+      },
+      rightLowerLeg: {
+        kneeAngle: -160,
+      },
+      leftUpperArm: {
+        shoulderAngle: 80,
+      },
+      rightUpperArm: {
+        shoulderAngle: 100,
+      },
+      leftLowerArm: {
+        elbowAngle: 90,
+      },
+      rightLowerArm: {
+        elbowAngle: -90,
+      },
+    },
+  },
+  triangle: {
+    id: 'triangle',
+    name: 'Triangle',
+    sanskritName: 'Utthita Trikoṇāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 30,
+      },
+      leftUpperLeg: {
+        hipAngle: 50,
+      },
+      rightUpperLeg: {
+        hipAngle: 50,
+      },
+      leftLowerLeg: {
+        kneeAngle: 2,
+      },
+      leftUpperArm: {
+        shoulderAngle: 60,
+      },
+      rightUpperArm: {
+        shoulderAngle: -60,
+      },
+    },
+  },
+  triangleLift: {
+    id: 'triangleLift',
+    name: 'Lift torso, Rotate front foot',
+    sanskritName: '',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 30,
+      },
+      leftUpperLeg: {
+        hipAngle: 40,
+      },
+      rightUpperLeg: {
+        hipAngle: 40,
+      },
+      leftLowerLeg: {
+        kneeAngle: 2,
+      },
+      leftUpperArm: {
+        shoulderAngle: 60,
+      },
+      rightUpperArm: {
+        shoulderAngle: -60,
+      },
+    },
+  },
+  goddess: {
+    id: 'goddess',
+    name: 'Goddess',
+    sanskritName: 'Utkata Konasana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      leftUpperLeg: {
+        hipAngle: 80,
+      },
+      rightUpperLeg: {
+        hipAngle: 80,
+      },
+      leftLowerLeg: {
+        kneeAngle: 70,
+      },
+      rightLowerLeg: {
+        kneeAngle: 70,
+      },
+      rightUpperArm: {
+        shoulderAngle: 30,
+      },
+      rightLowerArm: {
+        elbowAngle: -170,
+      },
+      leftUpperArm: {
+        shoulderAngle: 30,
+      },
+      leftLowerArm: {
+        elbowAngle: -170,
+      },
+    },
+  },
+  goddessLifted: {
+    id: 'goddessLifted',
+    name: 'Lift torso, adjust feet',
+    sanskritName: 'Utkata Konasana',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      leftUpperLeg: {
+        hipAngle: 60,
+      },
+      rightUpperLeg: {
+        hipAngle: 60,
+      },
+      leftLowerLeg: {
+        kneeAngle: 60,
+      },
+      rightLowerLeg: {
+        kneeAngle: 60,
+      },
+      rightUpperArm: {
+        shoulderAngle: 30,
+      },
+      rightLowerArm: {
+        elbowAngle: -170,
+      },
+      leftUpperArm: {
+        shoulderAngle: 30,
+      },
+      leftLowerArm: {
+        elbowAngle: -170,
+      },
+    },
+  },
+  camel: {
+    id: 'camel',
+    name: 'Camel',
+    sanskritName: 'Uṣtrāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      chest: {
+        abdomenAngle: -5,
+      },
+      abdomen: {
+        hipAngle: -5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 90,
+      },
+      rightLowerLeg: {
+        kneeAngle: -90,
+      },
+      leftUpperArm: {
+        shoulderAngle: 140,
+      },
+      rightUpperArm: {
+        shoulderAngle: 40,
+      },
+      leftLowerArm: {
+        elbowAngle: 90,
+      },
+      rightLowerArm: {
+        elbowAngle: -90,
+      },
+    },
+  },
+  downwardDogHipStretch: {
+    id: 'downwardDogHipStretch',
+    name: 'Downward Facing Dog - Hip Stretch/Stack',
+    sanskritName: 'Adho Mukha Śvānāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 137,
+      },
+      rightUpperLeg: {
+        hipAngle: 140,
+      },
+      leftLowerLeg: {
+        kneeAngle: 60,
+      },
+      rightLowerLeg: {
+        kneeAngle: -130,
+      },
+      leftUpperArm: {
+        shoulderAngle: -80,
+      },
+      rightUpperArm: {
+        shoulderAngle: 260,
+      },
+      leftLowerArm: {
+        elbowAngle: 10,
+      },
+      rightLowerArm: {
+        elbowAngle: -10,
+      },
+    },
+  },
+  halfPigeon: {
+    id: 'halfPigeon',
+    name: 'Half Pigeon',
+    sanskritName: 'Eka Pāda Kapotāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: 30,
+      },
+      chest: {
+        abdomenAngle: 2,
+      },
+      abdomen: {
+        hipAngle: 80,
+      },
+      leftUpperLeg: {
+        hipAngle: -77.5,
+      },
+      rightUpperLeg: {
+        hipAngle: -70,
+      },
+      leftLowerLeg: {
+        kneeAngle: 5,
+      },
+      rightLowerLeg: {
+        kneeAngle: -160,
+      },
+      leftUpperArm: {
+        shoulderAngle: 10,
+      },
+      rightUpperArm: {
+        shoulderAngle: 170,
+      },
+      leftLowerArm: {
+        elbowAngle: 90,
+      },
+      rightLowerArm: {
+        elbowAngle: -90,
+      },
+    },
+  },
+  locust: {
+    id: 'locust',
+    name: 'Locust',
+    sanskritName: 'Śalabhāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      chest: {
+        abdomenAngle: -10,
+      },
+      abdomen: {
+        hipAngle: 85,
+      },
+      leftUpperLeg: {
+        hipAngle: -95,
+      },
+      rightUpperLeg: {
+        hipAngle: 95,
+      },
+      leftLowerLeg: {
+        kneeAngle: 2,
+      },
+      rightLowerLeg: {
+        kneeAngle: -2,
+      },
+      leftUpperArm: {
+        shoulderAngle: 105,
+      },
+      rightUpperArm: {
+        shoulderAngle: 77,
+      },
+      leftLowerArm: {
+        elbowAngle: 2,
+      },
+      rightLowerArm: {
+        elbowAngle: -2,
+      },
+    },
+  },
+  seatedForwardFold: {
+    id: 'seatedForwardFold',
+    name: 'Seated Forward Fold',
+    sanskritName: 'Paścimottānāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: -5,
+      },
+      abdomen: {
+        hipAngle: 55,
+      },
+      leftUpperLeg: {
+        hipAngle: 95,
+      },
+      rightUpperLeg: {
+        hipAngle: -95,
+      },
+      leftLowerLeg: {
+        kneeAngle: 10,
+      },
+      rightLowerLeg: {
+        kneeAngle: -10,
+      },
+      leftUpperArm: {
+        shoulderAngle: -20,
+      },
+      rightUpperArm: {
+        shoulderAngle: -160,
+      },
+      leftLowerArm: {
+        elbowAngle: 2,
+      },
+      rightLowerArm: {
+        elbowAngle: -2,
+      },
+    },
+  },
+  staff: {
+    id: 'staff',
+    name: 'Staff',
+    sanskritName: 'Dandasana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: -5,
+      },
+      leftUpperLeg: {
+        hipAngle: 92,
+      },
+      rightUpperLeg: {
+        hipAngle: -92,
+      },
+      leftLowerLeg: {
+        kneeAngle: 5,
+      },
+      rightLowerLeg: {
+        kneeAngle: -5,
+      },
+      leftUpperArm: {
+        shoulderAngle: 90,
+      },
+      rightUpperArm: {
+        shoulderAngle: 90,
+      },
+      leftLowerArm: {
+        elbowAngle: 2,
+      },
+      rightLowerArm: {
+        elbowAngle: -2,
+      },
+    },
+  },
+  happyBaby: {
+    id: 'happyBaby',
+    name: 'Happy Baby',
+    sanskritName: 'Ānanda Bālāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: 60,
+      },
+      abdomen: {
+        hipAngle: -90,
+      },
+      leftUpperLeg: {
+        hipAngle: -120,
+      },
+      leftLowerLeg: {
+        kneeAngle: 60,
+      },
+      rightUpperLeg: {
+        hipAngle: 110,
+      },
+      rightLowerLeg: {
+        kneeAngle: -60,
+      },
+      leftUpperArm: {
+        shoulderAngle: 5,
+      },
+      rightUpperArm: {
+        shoulderAngle: -180,
+      },
+    },
+  },
+  supineTwist: {
+    id: 'supineTwist',
+    name: 'Supine Twist',
+    sanskritName: 'Jaṭhara Parivartanasana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: 60,
+      },
+      abdomen: {
+        hipAngle: -90,
+      },
+      leftUpperLeg: {
+        hipAngle: -140,
+      },
+      leftLowerLeg: {
+        kneeAngle: 170,
+      },
+      rightUpperLeg: {
+        hipAngle: -90,
+      },
+      rightLowerLeg: {
+        kneeAngle: 0,
+      },
+      leftUpperArm: {
+        shoulderAngle: 90,
+      },
+      rightUpperArm: {
+        shoulderAngle: 120,
+      },
+      rightLowerArm: {
+        elbowAngle: -60,
+      },
+    },
+  },
+  supineKneesCenter: {
+    id: 'supineKneesCenter',
+    name: 'Knees Center',
+    sanskritName: '',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      head: {
+        neckAngle: 60,
+      },
+      abdomen: {
+        hipAngle: -90,
+      },
+      leftUpperLeg: {
+        hipAngle: 180,
+      },
+      leftLowerLeg: {
+        kneeAngle: 90,
+      },
+      rightUpperLeg: {
+        hipAngle: -180,
+      },
+      rightLowerLeg: {
+        kneeAngle: -90,
+      },
+      leftUpperArm: {
+        shoulderAngle: 90,
+      },
+      rightUpperArm: {
+        shoulderAngle: 90,
+      },
+    },
+  },
+  corpse: {
+    id: 'corpse',
+    name: 'Corpse',
+    sanskritName: 'Śavāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: 60,
+      },
+      abdomen: {
+        hipAngle: -90,
+      },
+      leftUpperLeg: {
+        hipAngle: 90,
+      },
+      leftLowerLeg: {
+        kneeAngle: 0,
+      },
+      rightUpperLeg: {
+        hipAngle: -90,
+      },
+      rightLowerLeg: {
+        kneeAngle: 0,
+      },
+      leftUpperArm: {
+        shoulderAngle: 90,
+      },
+      rightUpperArm: {
+        shoulderAngle: 90,
+      },
+    },
+  },
+} as const satisfies Record<string, PostureMetadata>;
+
+export const getPosture = (id: PostureId | null) =>
+  id ? POSTURE_MAP[id] : null;
+
+export type PostureId = keyof typeof POSTURE_MAP;
+
+export type Posture = (typeof POSTURE_MAP)[PostureId];

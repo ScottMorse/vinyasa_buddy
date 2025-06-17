@@ -1,16 +1,15 @@
-interface StickFigureConfig {
+export interface StickFigureConfig {
   headRadius: number;
   lineWidth: number;
-  floorY: number;
 }
 
-interface CircleDisplay {
+export interface CircleDisplay {
   x: number;
   y: number;
   radius: number;
 }
 
-interface LineDisplay {
+export interface LineDisplay {
   x1: number;
   y1: number;
   x2: number;
@@ -36,7 +35,7 @@ interface StickFigureDisplay {
   rightLowerLeg: LineDisplay;
 }
 
-interface StickFigurePosition {
+export interface StickFigurePosition {
   head: {
     neckAngle: number;
   };
@@ -76,9 +75,12 @@ interface StickFigurePosition {
 }
 
 /** Drawn from top to bottom, so x1,y1 points are higher than x2,y2 points */
-const getNeutralStickFigure = ({ headRadius }: StickFigureConfig) => {
-  const neckLength = headRadius / 1.5;
-  const upperArmLength = neckLength * 2.5;
+const getNeutralStickFigure = ({
+  headRadius,
+  lineWidth,
+}: StickFigureConfig) => {
+  const neckLength = headRadius * 1.25;
+  const upperArmLength = neckLength * 2;
   const lowerArmLength = upperArmLength;
   const torsoLength = neckLength * 4;
   const chestLength = torsoLength / 2;
@@ -87,11 +89,18 @@ const getNeutralStickFigure = ({ headRadius }: StickFigureConfig) => {
   const lowerLegLength = upperLegLength;
 
   const height =
-    headRadius * 2 + neckLength + torsoLength + upperLegLength + lowerLegLength;
+    headRadius * 2 +
+    neckLength +
+    torsoLength +
+    upperLegLength +
+    lowerLegLength +
+    upperArmLength +
+    lowerArmLength +
+    lineWidth * 2;
   const width = height;
 
   const headX = width / 2;
-  const headY = height - headRadius;
+  const headY = headRadius + lineWidth;
 
   const neckX1 = headX;
   const neckY1 = headY + headRadius;
@@ -259,23 +268,69 @@ const angleCircleOrigin = (
   y: edgeY - Math.sin((angle * Math.PI) / 180) * radius,
 });
 
-const offsetLine = (line: LineDisplay, offset: number) => ({
+const offsetLine = (line: LineDisplay, offsetY: number, offsetX: number) => ({
   ...line,
-  y1: line.y1 + offset,
-  y2: line.y2 + offset,
+  y1: line.y1 + offsetY,
+  y2: line.y2 + offsetY,
+  x1: line.x1 + offsetX,
+  x2: line.x2 + offsetX,
 });
 
+const NEUTRAL_POSITION: StickFigurePosition = {
+  head: {
+    neckAngle: 0,
+  },
+  neck: {
+    chestAngle: 0,
+  },
+  chest: {
+    abdomenAngle: 0,
+  },
+  abdomen: {
+    hipAngle: 0,
+  },
+  leftUpperArm: {
+    shoulderAngle: 0,
+  },
+  rightUpperArm: {
+    shoulderAngle: 0,
+  },
+  leftLowerArm: {
+    elbowAngle: 0,
+  },
+  rightLowerArm: {
+    elbowAngle: 0,
+  },
+  leftUpperLeg: {
+    hipAngle: 0,
+  },
+  leftLowerLeg: {
+    kneeAngle: 0,
+  },
+  rightUpperLeg: {
+    hipAngle: 0,
+  },
+  rightLowerLeg: {
+    kneeAngle: 0,
+  },
+};
+
 export const positionStickFigure = (
-  position: StickFigurePosition,
+  _position: Partial<StickFigurePosition>,
   config: StickFigureConfig,
 ): StickFigureDisplay => {
-  const figure = getNeutralStickFigure(config);
+  const neutral = getNeutralStickFigure(config);
+
+  const position = {
+    ...NEUTRAL_POSITION,
+    ..._position,
+  };
 
   const abdomenHipAngle = -position.abdomen.hipAngle - 90;
   const abdomen = angleLine(
-    figure.abdomen.x2,
-    figure.abdomen.y2,
-    figure.abdomen.length,
+    neutral.abdomen.x2,
+    neutral.abdomen.y2,
+    neutral.abdomen.length,
     abdomenHipAngle,
   );
 
@@ -283,7 +338,7 @@ export const positionStickFigure = (
   const chest = angleLine(
     abdomen.x2,
     abdomen.y2,
-    figure.chest.length,
+    neutral.chest.length,
     chestAbdomenAngle,
   );
 
@@ -291,7 +346,7 @@ export const positionStickFigure = (
   const neck = angleLine(
     chest.x2,
     chest.y2,
-    figure.neck.length,
+    neutral.neck.length,
     neckChestAngle,
   );
 
@@ -305,70 +360,68 @@ export const positionStickFigure = (
   const leftUpperArmShoulderAngle =
     chestAbdomenAngle - position.leftUpperArm.shoulderAngle - 90;
   const leftUpperArm = angleLine(
-    neck.x1,
+    neck.x1 - config.lineWidth,
     neck.y1,
-    figure.leftUpperArm.length,
+    neutral.leftUpperArm.length,
     leftUpperArmShoulderAngle,
   );
 
   const leftLowerArm = angleLine(
     leftUpperArm.x2,
     leftUpperArm.y2,
-    figure.leftLowerArm.length,
+    neutral.leftLowerArm.length,
     leftUpperArmShoulderAngle + position.leftLowerArm.elbowAngle,
   );
 
   const rightUpperArmShoulderAngle =
     chestAbdomenAngle + position.rightUpperArm.shoulderAngle + 90;
   const rightUpperArm = angleLine(
-    neck.x1,
+    neck.x1 + config.lineWidth,
     neck.y1,
-    figure.rightUpperArm.length,
+    neutral.rightUpperArm.length,
     rightUpperArmShoulderAngle,
   );
 
   const rightLowerArm = angleLine(
     rightUpperArm.x2,
     rightUpperArm.y2,
-    figure.rightLowerArm.length,
+    neutral.rightLowerArm.length,
     rightUpperArmShoulderAngle - position.rightLowerArm.elbowAngle,
   );
 
   const leftUpperLegHipAngle = position.leftUpperLeg.hipAngle - 270;
   const leftUpperLeg = angleLine(
-    abdomen.x1,
+    abdomen.x1 - config.lineWidth,
     abdomen.y1,
-    figure.leftUpperLeg.length,
+    neutral.leftUpperLeg.length,
     leftUpperLegHipAngle,
   );
 
   const leftLowerLeg = angleLine(
     leftUpperLeg.x2,
     leftUpperLeg.y2,
-    figure.leftLowerLeg.length,
+    neutral.leftLowerLeg.length,
     leftUpperLegHipAngle - position.leftLowerLeg.kneeAngle,
   );
 
   const rightUpperLegHipAngle = -position.rightUpperLeg.hipAngle + 90;
   const rightUpperLeg = angleLine(
-    abdomen.x1,
+    abdomen.x1 + config.lineWidth,
     abdomen.y1,
-    figure.rightUpperLeg.length,
+    neutral.rightUpperLeg.length,
     rightUpperLegHipAngle,
   );
 
   const rightLowerLeg = angleLine(
     rightUpperLeg.x2,
     rightUpperLeg.y2,
-    figure.rightLowerLeg.length,
+    neutral.rightLowerLeg.length,
     rightUpperLegHipAngle + position.rightLowerLeg.kneeAngle,
   );
 
-  const { floorY } = config;
-
   const result = {
-    width: figure.width,
-    height: figure.height,
+    width: neutral.width,
+    height: neutral.height,
     lineWidth: config.lineWidth,
     head: {
       ...head,
@@ -406,7 +459,63 @@ export const positionStickFigure = (
     result.rightLowerLeg.y2,
   );
 
-  const floorOffset = floorY - lowestPoint;
+  const leftmostPoint = Math.min(
+    result.head.x - result.head.radius,
+    result.neck.x1,
+    result.neck.x2,
+    result.chest.x1,
+    result.chest.x2,
+    result.abdomen.x1,
+    result.abdomen.x2,
+    result.leftUpperLeg.x1,
+    result.leftUpperLeg.x2,
+    result.rightUpperLeg.x1,
+    result.rightUpperLeg.x2,
+    result.leftLowerLeg.x1,
+    result.leftLowerLeg.x2,
+    result.rightLowerLeg.x1,
+    result.rightLowerLeg.x2,
+    result.leftUpperArm.x1,
+    result.leftUpperArm.x2,
+    result.rightUpperArm.x1,
+    result.rightUpperArm.x2,
+    result.leftLowerArm.x1,
+    result.leftLowerArm.x2,
+    result.rightLowerArm.x1,
+    result.rightLowerArm.x2,
+  );
+
+  const rightmostPoint = Math.max(
+    result.head.x + result.head.radius,
+    result.neck.x1,
+    result.neck.x2,
+    result.chest.x1,
+    result.chest.x2,
+    result.abdomen.x1,
+    result.abdomen.x2,
+    result.leftUpperLeg.x1,
+    result.leftUpperLeg.x2,
+    result.rightUpperLeg.x1,
+    result.rightUpperLeg.x2,
+    result.leftLowerLeg.x1,
+    result.leftLowerLeg.x2,
+    result.rightLowerLeg.x1,
+    result.rightLowerLeg.x2,
+    result.leftUpperArm.x1,
+    result.leftUpperArm.x2,
+    result.rightUpperArm.x1,
+    result.rightUpperArm.x2,
+    result.leftLowerArm.x1,
+    result.leftLowerArm.x2,
+    result.rightLowerArm.x1,
+    result.rightLowerArm.x2,
+  );
+
+  const floorY = result.height - config.lineWidth;
+  const yOffset = floorY - lowestPoint - config.lineWidth;
+
+  const figureMiddle = (rightmostPoint - leftmostPoint) / 2 + leftmostPoint;
+  const xOffset = result.width / 2 - figureMiddle;
 
   return {
     ...result,
@@ -418,18 +527,19 @@ export const positionStickFigure = (
     },
     head: {
       ...result.head,
-      y: result.head.y + floorOffset,
+      y: result.head.y + yOffset,
+      x: result.head.x + xOffset,
     },
-    neck: offsetLine(result.neck, floorOffset),
-    chest: offsetLine(result.chest, floorOffset),
-    abdomen: offsetLine(result.abdomen, floorOffset),
-    leftUpperArm: offsetLine(result.leftUpperArm, floorOffset),
-    leftLowerArm: offsetLine(result.leftLowerArm, floorOffset),
-    rightUpperArm: offsetLine(result.rightUpperArm, floorOffset),
-    rightLowerArm: offsetLine(result.rightLowerArm, floorOffset),
-    leftUpperLeg: offsetLine(result.leftUpperLeg, floorOffset),
-    leftLowerLeg: offsetLine(result.leftLowerLeg, floorOffset),
-    rightUpperLeg: offsetLine(result.rightUpperLeg, floorOffset),
-    rightLowerLeg: offsetLine(result.rightLowerLeg, floorOffset),
+    neck: offsetLine(result.neck, yOffset, xOffset),
+    chest: offsetLine(result.chest, yOffset, xOffset),
+    abdomen: offsetLine(result.abdomen, yOffset, xOffset),
+    leftUpperArm: offsetLine(result.leftUpperArm, yOffset, xOffset),
+    leftLowerArm: offsetLine(result.leftLowerArm, yOffset, xOffset),
+    rightUpperArm: offsetLine(result.rightUpperArm, yOffset, xOffset),
+    rightLowerArm: offsetLine(result.rightLowerArm, yOffset, xOffset),
+    leftUpperLeg: offsetLine(result.leftUpperLeg, yOffset, xOffset),
+    leftLowerLeg: offsetLine(result.leftLowerLeg, yOffset, xOffset),
+    rightUpperLeg: offsetLine(result.rightUpperLeg, yOffset, xOffset),
+    rightLowerLeg: offsetLine(result.rightLowerLeg, yOffset, xOffset),
   };
 };
