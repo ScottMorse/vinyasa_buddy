@@ -24,13 +24,14 @@ export const LayoutFigure = () => {
 
   return (
     <Stack align="center" justify="center" position="relative" zIndex={0}>
-      <HStack justify="space-between" w="100%">
+      <HStack justify="space-between" w="100%" position="relative">
         <Button
           color="secondary"
           fontWeight="bold"
+          position="absolute"
           variant="outline"
-          mr={{ base: '-4rem', sm: '-6rem' }}
           opacity={prev ? 1 : 0}
+          left={{ base: '-4rem', sm: '0rem', md: '-2rem' }}
           disabled={!prev}
           onClick={() => prev && setSequenceIndex(prev.index)}
           zIndex={1}
@@ -57,11 +58,12 @@ export const LayoutFigure = () => {
             color="secondary"
             fontWeight="bold"
             variant="outline"
-            ml={{ base: '-4rem', md: '-6rem' }}
             opacity={next ? 1 : 0}
             disabled={!next}
             onClick={() => next && setSequenceIndex(next.index)}
             zIndex={1}
+            position="absolute"
+            right={{ base: '-4rem', sm: '0rem', md: '-2rem' }}
             aria-label="Next posture"
           >
             <Icon as={FaArrowRight} />
