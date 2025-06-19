@@ -321,7 +321,7 @@ const POSTURE_MAP = {
   },
   attention: {
     id: 'attention',
-    name: 'Attention',
+    name: 'Standing At Attention',
     sanskritName: 'Samasthiti',
     cues: [],
     adjustments: [],
@@ -1146,7 +1146,7 @@ const POSTURE_MAP = {
   crescentLungePrayer: {
     id: 'crescentLungePrayer',
     name: 'Crescent Lunge Prayer Hands',
-    sanskritName: 'Āñjaneyāsana',
+    sanskritName: '',
     cues: [],
     adjustments: [],
     stickFigurePosition: {
@@ -1180,7 +1180,7 @@ const POSTURE_MAP = {
   crescentLungeLengthen: {
     id: 'crescentLungeLengthen',
     name: 'Lengthen Torso Forward',
-    sanskritName: 'Āñjaneyāsana',
+    sanskritName: '',
     cues: [],
     adjustments: [],
     stickFigurePosition: {

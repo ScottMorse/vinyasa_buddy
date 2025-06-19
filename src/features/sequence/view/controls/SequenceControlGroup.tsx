@@ -25,6 +25,7 @@ export const SequenceControlGroup = () => {
   const hideOptions = useHideOptions();
 
   const fontSize = { base: '1.4rem', sm: '1.6rem', md: '2rem' };
+  const descriptionFontSize = { base: '1.2rem', sm: '1.4rem', md: '1.6rem' };
 
   return (
     <Stack gap="0.5rem">
@@ -44,7 +45,7 @@ export const SequenceControlGroup = () => {
 
         <Select.Control w="fit-content" cursor="pointer">
           <Select.Trigger
-            borderColor="secondary"
+            borderColor="backgroundSecondary"
             borderWidth={2}
             borderRadius="xl"
             cursor="pointer"
@@ -71,7 +72,8 @@ export const SequenceControlGroup = () => {
           <Select.Content
             bg="backgroundSecondary"
             color="textPrimary"
-            minW="25rem"
+            minW="30rem"
+            minH="min(55rem, (100dvh - 20rem))"
             _scrollbar={{
               bg: 'background',
               color: 'textPrimary',
@@ -87,11 +89,11 @@ export const SequenceControlGroup = () => {
               <Select.Item
                 key={item?.id}
                 item={item}
-                border="2px solid"
-                borderBottom={
-                  i === collection.items.length - 1 ? '2px solid' : 'none'
-                }
-                borderColor="secondary"
+                borderBottom="1px solid"
+                borderColor="textSecondary"
+                ml="-0.5rem"
+                px="1rem"
+                py="1rem"
                 cursor="pointer"
                 fontSize={fontSize}
                 onClick={() => {
@@ -101,10 +103,13 @@ export const SequenceControlGroup = () => {
                 }}
                 _hover={{
                   bg: 'secondary',
+                  _selected: {
+                    bg: 'primary',
+                  },
                   color: 'background',
                 }}
                 _selected={{
-                  bg: 'secondary',
+                  bg: 'primary',
                   color: 'background',
                 }}
               >
@@ -117,7 +122,15 @@ export const SequenceControlGroup = () => {
       </Select.Root>
 
       <HiddenField isHidden={hideOptions.seriesName} fieldName="Series Name">
-        <Text textStyle="sm" color="primary" fontSize={fontSize}>
+        <Text
+          textStyle="sm"
+          mt="0.25rem"
+          color="secondary"
+          maxWidth="10rem"
+          whiteSpace="nowrap"
+          fontWeight="semibold"
+          fontSize={fontSize}
+        >
           {currentSequenceItem?.group?.name}
         </Text>
       </HiddenField>
@@ -128,18 +141,20 @@ export const SequenceControlGroup = () => {
         >
           <Text
             textStyle="sm"
-            maxWidth="20rem"
+            maxWidth="16rem"
+            maxLines={2}
             minHeight="1.5rem"
             maxHeight="1.5rem"
             display="block"
             overflowY="visible"
             color="textSecondary"
+            fontSize={descriptionFontSize}
           >
             {currentSequenceItem?.group.description}
           </Text>
         </HiddenField>
       ) : (
-        <Text textStyle="sm" opacity={0}>
+        <Text textStyle="sm" minHeight="2rem" opacity={0}>
           N/A
         </Text>
       )}

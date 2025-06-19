@@ -8,7 +8,7 @@ export const SequenceControls = () => {
       w="fit-content"
       justifyContent="center"
       align="flex-start"
-      gap="0.5rem"
+      gap="1rem"
       px="1rem"
     >
       <SequenceControlGroup />

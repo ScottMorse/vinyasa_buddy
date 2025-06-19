@@ -4,13 +4,14 @@ import {
   useWindowWidth,
 } from '@/features/store';
 import { StickFigure } from '@/features/stickFigure/view/StickFigure';
-import { Button, HStack, Stack } from '@chakra-ui/react';
+import { Button, HStack, Icon, IconButton, Stack } from '@chakra-ui/react';
 import {
   useCurrentSequenceItem,
   useSequenceNavigationItems,
 } from '@/features/sequence';
 import { getPosture } from '@/features/posture';
 import { HiddenField } from '@/features/hide/view';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 export const LayoutFigure = () => {
   const sequenceItem = useCurrentSequenceItem();
@@ -23,18 +24,22 @@ export const LayoutFigure = () => {
 
   return (
     <Stack align="center" justify="center" position="relative" zIndex={0}>
-      <HStack justify="space-between" w="100%">
+      <HStack justify="space-between" w="100%" position="relative">
         <Button
           color="secondary"
           fontWeight="bold"
+          position="absolute"
+          py={{ base: '2.25rem', md: '2.5rem' }}
+          px={{ base: '1.5rem', md: '1.65rem' }}
           variant="outline"
-          mr={{ base: '-8rem', sm: '-6rem' }}
           opacity={prev ? 1 : 0}
+          left={{ base: '-3rem', sm: '0rem', md: '-2rem' }}
           disabled={!prev}
           onClick={() => prev && setSequenceIndex(prev.index)}
           zIndex={1}
+          aria-label="Previous posture"
         >
-          ⇦
+          <Icon width="1.75rem" height="1.75rem" as={FaArrowLeft} />
         </Button>
         <HiddenField
           isHidden={hideOptions.vinyasaBuddy}
@@ -45,8 +50,15 @@ export const LayoutFigure = () => {
               getPosture(sequenceItem?.posture)?.stickFigurePosition ?? null
             }
             config={{
-              headRadius: windowWidth < 500 ? 15 : windowWidth < 768 ? 20 : 30,
-              lineWidth: windowWidth < 500 ? 10 : windowWidth < 768 ? 12 : 16,
+              headRadius:
+                windowWidth < 500
+                  ? 12
+                  : windowWidth < 768
+                    ? 20
+                    : windowWidth < 2000
+                      ? 24
+                      : 30,
+              lineWidth: windowWidth < 500 ? 8 : windowWidth < 768 ? 12 : 16,
             }}
           />
         </HiddenField>
@@ -55,13 +67,17 @@ export const LayoutFigure = () => {
             color="secondary"
             fontWeight="bold"
             variant="outline"
-            ml={{ base: '-8rem', md: '-6rem' }}
             opacity={next ? 1 : 0}
             disabled={!next}
+            py={{ base: '2.25rem', md: '2.5rem' }}
+            px={{ base: '1.5rem', sm: '1.65rem' }}
             onClick={() => next && setSequenceIndex(next.index)}
             zIndex={1}
+            position="absolute"
+            right={{ base: '-3rem', sm: '0rem', md: '-2rem' }}
+            aria-label="Next posture"
           >
-            ⇨
+            <Icon width="1.75rem" height="1.75rem" as={FaArrowRight} />
           </Button>
         )}
       </HStack>

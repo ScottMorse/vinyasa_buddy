@@ -6,6 +6,11 @@ on:
   - workflow_call
   - workflow_dispatch
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   deploy_gh_pages:
     environment: github-pages
@@ -21,7 +26,7 @@ jobs:
           echo "/* /index.html 200\n" >> ./build/_redirects
           touch ./build/.nojekyll
         env:
-          PUBLIC_PATH: /web
+          PUBLIC_PATH: /vinyasa_buddy/
 
       - name: Clean gh-pages branch
         run: |
@@ -30,7 +35,7 @@ jobs:
           git checkout --orphan gh-pages
           git rm -rf --dry-run .
           git rm -rf .
-          git config --global user.email "github-actions-bot@github.com"
+          git config --global user.email "github-actions-bot@users.noreply.github.com"
           git config --global user.name "GitHub Actions"
           git commit --allow-empty -m "Clean gh-pages branch"
           git push -u origin gh-pages

@@ -1,5 +1,15 @@
 import { useHideOptions, useUpdateHideOptions } from '@/features/store';
-import { Button, HStack } from '@chakra-ui/react';
+import { Button, HStack, Icon } from '@chakra-ui/react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
+const HideIcon = ({ isHidden }: { isHidden: boolean }) => (
+  <Icon
+    aria-label={isHidden ? 'Show' : 'Hide'}
+    width="1.5rem"
+    height="1.5rem"
+    as={isHidden ? FaEyeSlash : FaEye}
+  />
+);
 
 export const HideControls = () => {
   const hideOptions = useHideOptions();
@@ -17,7 +27,7 @@ export const HideControls = () => {
           setHideOptions({ postureName: !hideOptions.postureName })
         }
       >
-        {hideOptions.postureName ? '✔' : ''} Hide Posture Name
+        <HideIcon isHidden={hideOptions.postureName} /> Posture Name
       </Button>
 
       <Button
@@ -32,7 +42,7 @@ export const HideControls = () => {
           })
         }
       >
-        {hideOptions.postureSanskritName ? '✔' : ''} Hide Sanskrit
+        <HideIcon isHidden={hideOptions.postureSanskritName} /> Sanskrit
       </Button>
       <Button
         variant="outline"
@@ -42,7 +52,7 @@ export const HideControls = () => {
         py="1.75rem"
         onClick={() => setHideOptions({ seriesName: !hideOptions.seriesName })}
       >
-        {hideOptions.seriesName ? '✔' : ''} Hide Series Name
+        <HideIcon isHidden={hideOptions.seriesName} /> Series Name
       </Button>
       <Button
         variant="outline"
@@ -54,7 +64,7 @@ export const HideControls = () => {
           setHideOptions({ seriesDescription: !hideOptions.seriesDescription })
         }
       >
-        {hideOptions.seriesDescription ? '✔' : ''} Hide Series Info
+        <HideIcon isHidden={hideOptions.seriesDescription} /> Series Info
       </Button>
       <Button
         variant="outline"
@@ -64,7 +74,7 @@ export const HideControls = () => {
         py="1.75rem"
         onClick={() => setHideOptions({ breath: !hideOptions.breath })}
       >
-        {hideOptions.breath ? '✔' : ''} Hide Breath
+        <HideIcon isHidden={hideOptions.breath} /> Breath
       </Button>
       <Button
         variant="outline"
@@ -74,7 +84,7 @@ export const HideControls = () => {
         py="1.75rem"
         onClick={() => setHideOptions({ duration: !hideOptions.duration })}
       >
-        {hideOptions.duration ? '✔' : ''} Hide Duration
+        <HideIcon isHidden={hideOptions.duration} /> Duration
       </Button>
       <Button
         variant="outline"
@@ -86,7 +96,7 @@ export const HideControls = () => {
           setHideOptions({ vinyasaBuddy: !hideOptions.vinyasaBuddy })
         }
       >
-        {hideOptions.vinyasaBuddy ? '✔' : ''} Hide Vinyasa Buddy
+        <HideIcon isHidden={hideOptions.vinyasaBuddy} /> Vinyasa Buddy
       </Button>
     </HStack>
   );
