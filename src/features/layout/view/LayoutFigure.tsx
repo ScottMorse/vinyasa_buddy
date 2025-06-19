@@ -4,13 +4,14 @@ import {
   useWindowWidth,
 } from '@/features/store';
 import { StickFigure } from '@/features/stickFigure/view/StickFigure';
-import { Button, HStack, Stack } from '@chakra-ui/react';
+import { Button, HStack, Icon, IconButton, Stack } from '@chakra-ui/react';
 import {
   useCurrentSequenceItem,
   useSequenceNavigationItems,
 } from '@/features/sequence';
 import { getPosture } from '@/features/posture';
 import { HiddenField } from '@/features/hide/view';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 export const LayoutFigure = () => {
   const sequenceItem = useCurrentSequenceItem();
@@ -28,13 +29,14 @@ export const LayoutFigure = () => {
           color="secondary"
           fontWeight="bold"
           variant="outline"
-          mr={{ base: '-8rem', sm: '-6rem' }}
+          mr={{ base: '-4rem', sm: '-6rem' }}
           opacity={prev ? 1 : 0}
           disabled={!prev}
           onClick={() => prev && setSequenceIndex(prev.index)}
           zIndex={1}
+          aria-label="Previous posture"
         >
-          ⇦
+          <Icon as={FaArrowLeft} />
         </Button>
         <HiddenField
           isHidden={hideOptions.vinyasaBuddy}
@@ -45,7 +47,7 @@ export const LayoutFigure = () => {
               getPosture(sequenceItem?.posture)?.stickFigurePosition ?? null
             }
             config={{
-              headRadius: windowWidth < 500 ? 15 : windowWidth < 768 ? 20 : 30,
+              headRadius: windowWidth < 500 ? 12 : windowWidth < 768 ? 20 : 30,
               lineWidth: windowWidth < 500 ? 10 : windowWidth < 768 ? 12 : 16,
             }}
           />
@@ -55,13 +57,14 @@ export const LayoutFigure = () => {
             color="secondary"
             fontWeight="bold"
             variant="outline"
-            ml={{ base: '-8rem', md: '-6rem' }}
+            ml={{ base: '-4rem', md: '-6rem' }}
             opacity={next ? 1 : 0}
             disabled={!next}
             onClick={() => next && setSequenceIndex(next.index)}
             zIndex={1}
+            aria-label="Next posture"
           >
-            ⇨
+            <Icon as={FaArrowRight} />
           </Button>
         )}
       </HStack>

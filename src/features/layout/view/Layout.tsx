@@ -55,7 +55,7 @@ export const Layout = () => {
       <LayoutDisclaimer />
       <LayoutHeader />
       <SequenceControls />
-      <Stack mt="3rem" mb={{ base: '-2rem', md: '-7rem' }}>
+      <Stack mt="3rem" mb={{ base: '-3rem', md: '-8rem' }}>
         <LayoutPosture />
       </Stack>
       <LayoutFigure />
