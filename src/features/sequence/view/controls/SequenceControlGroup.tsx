@@ -71,7 +71,8 @@ export const SequenceControlGroup = () => {
           <Select.Content
             bg="backgroundSecondary"
             color="textPrimary"
-            minW="25rem"
+            minW="30rem"
+            minH="55rem"
             _scrollbar={{
               bg: 'background',
               color: 'textPrimary',
@@ -91,7 +92,7 @@ export const SequenceControlGroup = () => {
                 borderColor="textSecondary"
                 ml="-0.5rem"
                 px="1rem"
-                py="0.5rem"
+                py="1rem"
                 cursor="pointer"
                 fontSize={fontSize}
                 onClick={() => {

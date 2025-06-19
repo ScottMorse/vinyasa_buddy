@@ -2,7 +2,7 @@ import { HiddenField } from '@/features/hide/view';
 import { getPosture } from '@/features/posture';
 import { useCurrentSequenceItem } from '@/features/sequence';
 import { useHideOptions, useSetSequenceIndex } from '@/features/store';
-import { Button, HStack, Stack, Text } from '@chakra-ui/react';
+import { Button, Stack, Text } from '@chakra-ui/react';
 import capitalize from 'lodash/capitalize';
 
 export const LayoutPosture = () => {

@@ -98,8 +98,9 @@ export const SequenceControlStep = () => {
           p={0}
           borderRadius="xl"
           color="textPrimary"
-          minW="25rem"
-          transform="translateX(-8rem)"
+          minW="30rem"
+          minH="80vh"
+          transform="translateX(-12rem)"
           _scrollbar={{
             bg: 'background',
             color: 'textPrimary',
@@ -118,7 +119,7 @@ export const SequenceControlStep = () => {
               borderColor="textSecondary"
             >
               <Select.ItemGroupLabel
-                fontSize="1.9rem"
+                fontSize={fontSize}
                 fontWeight="normal"
                 color="secondary"
                 borderBottom="2px solid"
@@ -133,7 +134,7 @@ export const SequenceControlStep = () => {
                   cursor="pointer"
                   borderBottom={i === items.length - 1 ? 'none' : '1px solid'}
                   borderColor="textSecondary"
-                  py="0.5rem"
+                  py="1rem"
                   px="1rem"
                   ml="-0.5rem"
                   fontSize={fontSize}
