@@ -47,7 +47,9 @@ export const DARK_THEME = createSystem(
       tokens: {
         colors: {
           primary: { value: '#FF8D85' },
-          secondary: { value: '#7678ED' },
+          // primary: { value: '#FFA472' },
+          // secondary: { value: '#7678ED' },
+          secondary: { value: '#898BF9' },
           success: { value: '#14CC92' },
           manilla: { value: '#F6D0B1' },
           background: { value: '#0E131B ' },

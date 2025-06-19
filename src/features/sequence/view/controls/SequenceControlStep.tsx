@@ -67,7 +67,7 @@ export const SequenceControlStep = () => {
 
       <Select.Control w="fit-content">
         <Select.Trigger
-          borderColor="secondary"
+          borderColor="backgroundSecondary"
           borderWidth={2}
           borderRadius="xl"
           cursor="pointer"
@@ -94,7 +94,7 @@ export const SequenceControlStep = () => {
         <Select.Content
           bg="backgroundSecondary"
           border="2px solid"
-          borderColor="secondary"
+          borderColor="backgroundSecondary"
           p={0}
           borderRadius="xl"
           color="textPrimary"
@@ -117,7 +117,13 @@ export const SequenceControlStep = () => {
               borderBottom="2px solid"
               borderColor="secondary"
             >
-              <Select.ItemGroupLabel color="secondary">
+              <Select.ItemGroupLabel
+                fontSize="1.9rem"
+                fontWeight="semibold"
+                color="textSecondary"
+                borderBottom="2px solid"
+                borderColor="secondary"
+              >
                 {name}
               </Select.ItemGroupLabel>
               {items.map((item) => (
@@ -125,10 +131,11 @@ export const SequenceControlStep = () => {
                   item={item}
                   key={`sequence-control-step-item-${item.value}`}
                   cursor="pointer"
-                  border="2px solid"
-                  borderBottom="none"
-                  borderLeft="none"
-                  borderColor="secondary"
+                  borderBottom="1px solid"
+                  borderColor="textSecondary"
+                  py="0.5rem"
+                  px="1rem"
+                  ml="-0.5rem"
                   fontSize={fontSize}
                   _hover={{
                     bg: 'secondary',

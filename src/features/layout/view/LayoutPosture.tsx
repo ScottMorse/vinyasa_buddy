@@ -83,7 +83,7 @@ export const LayoutPosture = () => {
               minW="20rem"
               fontSize={smallFontSize}
             >
-              {sequenceItem.breath}
+              {capitalize(sequenceItem.breath)}
             </Text>
           </HiddenField>
         </Stack>

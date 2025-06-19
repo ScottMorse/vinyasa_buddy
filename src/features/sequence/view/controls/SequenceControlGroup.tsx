@@ -44,7 +44,7 @@ export const SequenceControlGroup = () => {
 
         <Select.Control w="fit-content" cursor="pointer">
           <Select.Trigger
-            borderColor="secondary"
+            borderColor="backgroundSecondary"
             borderWidth={2}
             borderRadius="xl"
             cursor="pointer"
