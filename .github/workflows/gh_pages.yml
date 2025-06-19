@@ -30,6 +30,7 @@ jobs:
 
       - name: Clean gh-pages branch
         run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/your-username/your-repo.git
           cp -r .github /tmp/.github
           git push origin --delete gh-pages
           git checkout --orphan gh-pages
