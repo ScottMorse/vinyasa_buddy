@@ -52,7 +52,7 @@ export const DARK_THEME = createSystem(
           manilla: { value: '#F6D0B1' },
           background: { value: '#10151e ' },
           backgroundSecondary: { value: '#18212f' },
-          backgroundDark: { value: '#0f131a' },
+          backgroundDark: { value: '#0e1116' },
           textPrimary: { value: '#cdd6e5' },
           textContrast: { value: '#121212' },
           textSecondary: { value: '#98abca' },
