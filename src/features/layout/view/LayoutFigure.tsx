@@ -48,7 +48,7 @@ export const LayoutFigure = () => {
             }
             config={{
               headRadius: windowWidth < 500 ? 12 : windowWidth < 768 ? 20 : 30,
-              lineWidth: windowWidth < 500 ? 10 : windowWidth < 768 ? 12 : 16,
+              lineWidth: windowWidth < 500 ? 8 : windowWidth < 768 ? 12 : 16,
             }}
           />
         </HiddenField>
