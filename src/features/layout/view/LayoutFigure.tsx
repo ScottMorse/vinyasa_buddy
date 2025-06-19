@@ -29,11 +29,11 @@ export const LayoutFigure = () => {
           color="secondary"
           fontWeight="bold"
           position="absolute"
-          py="2.5rem"
-          px="1.65rem"
+          py={{ base: '2.25rem', md: '2.5rem' }}
+          px={{ base: '1.5rem', md: '1.65rem' }}
           variant="outline"
           opacity={prev ? 1 : 0}
-          left={{ base: '-4rem', sm: '0rem', md: '-2rem' }}
+          left={{ base: '-3rem', sm: '0rem', md: '-2rem' }}
           disabled={!prev}
           onClick={() => prev && setSequenceIndex(prev.index)}
           zIndex={1}
@@ -69,12 +69,12 @@ export const LayoutFigure = () => {
             variant="outline"
             opacity={next ? 1 : 0}
             disabled={!next}
-            py="2.5rem"
-            px="1.65rem"
+            py={{ base: '2.25rem', md: '2.5rem' }}
+            px={{ base: '1.5rem', sm: '1.65rem' }}
             onClick={() => next && setSequenceIndex(next.index)}
             zIndex={1}
             position="absolute"
-            right={{ base: '-4rem', sm: '0rem', md: '-2rem' }}
+            right={{ base: '-3rem', sm: '0rem', md: '-2rem' }}
             aria-label="Next posture"
           >
             <Icon width="1.75rem" height="1.75rem" as={FaArrowRight} />
