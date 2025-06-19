@@ -26,7 +26,7 @@ jobs:
           echo "/* /index.html 200\n" >> ./build/_redirects
           touch ./build/.nojekyll
         env:
-          PUBLIC_PATH: /vinyasa_buddy
+          PUBLIC_PATH: /vinyasa_buddy/
 
       - name: Clean gh-pages branch
         run: |
