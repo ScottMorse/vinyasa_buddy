@@ -48,7 +48,14 @@ export const LayoutFigure = () => {
               getPosture(sequenceItem?.posture)?.stickFigurePosition ?? null
             }
             config={{
-              headRadius: windowWidth < 500 ? 12 : windowWidth < 768 ? 20 : 30,
+              headRadius:
+                windowWidth < 500
+                  ? 12
+                  : windowWidth < 768
+                    ? 20
+                    : windowWidth < 2000
+                      ? 24
+                      : 30,
               lineWidth: windowWidth < 500 ? 8 : windowWidth < 768 ? 12 : 16,
             }}
           />
