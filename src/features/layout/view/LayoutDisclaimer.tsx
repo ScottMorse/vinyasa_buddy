@@ -38,7 +38,7 @@ export const LayoutDisclaimer = () => {
 
   return (
     <DialogRoot
-      // open={!acceptedDisclaimer && !disclaimerIgnored}
+      open={!acceptedDisclaimer && !disclaimerIgnored}
       placement="center"
       size={{ base: 'lg', md: 'xl' }}
     >

@@ -59,7 +59,13 @@ export const LayoutPosture = () => {
           isHidden={hideOptions.postureSanskritName}
           fieldName="Sanskrit Name"
         >
-          <Text textStyle="xl" minW="30rem" color="primary" fontSize={fontSize}>
+          <Text
+            textStyle="xl"
+            minW="30rem"
+            color="primary"
+            mt="1rem"
+            fontSize={fontSize}
+          >
             {posture.sanskritName}
           </Text>
         </HiddenField>

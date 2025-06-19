@@ -1,15 +1,36 @@
-import { LayoutDisclaimer } from './LayoutDisclaimer';
-import { LayoutFigure } from './LayoutFigure';
-import { LayoutHeader } from './LayoutHeader';
 import { Stack } from '@chakra-ui/react';
 import { useWindowWidth } from '../useWindowWidth';
 import {
   SequenceControls,
   useSequenceNavigationItems,
 } from '@/features/sequence';
-import { LayoutPosture } from './LayoutPosture';
-import { HideControls } from '@/features/hide/view';
 import { useSetSequenceIndex } from '@/features/store';
+import { lazyNamedImport } from '@/utils/lazy';
+
+const { LayoutDisclaimer } = lazyNamedImport(
+  () => import('./LayoutDisclaimer'),
+  'LayoutDisclaimer',
+);
+
+const { LayoutHeader } = lazyNamedImport(
+  () => import('./LayoutHeader'),
+  'LayoutHeader',
+);
+
+const { LayoutPosture } = lazyNamedImport(
+  () => import('./LayoutPosture'),
+  'LayoutPosture',
+);
+
+const { LayoutFigure } = lazyNamedImport(
+  () => import('./LayoutFigure'),
+  'LayoutFigure',
+);
+
+const { HideControls } = lazyNamedImport(
+  () => import('@/features/hide/view'),
+  'HideControls',
+);
 
 export const Layout = () => {
   useWindowWidth();

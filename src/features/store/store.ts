@@ -29,36 +29,42 @@ interface StoreState {
 }
 
 const useStore = create<StoreState>()(
-  // persist
-  (set) => ({
-    chakraSystem: DEFAULT_CHAKRA_SYSTEM,
-    setChakraSystem: (system) => set({ chakraSystem: system }),
-    sequenceIndex: null,
-    setSequenceIndex: (index) => set({ sequenceIndex: index }),
-    acceptedDisclaimer: false,
-    setAcceptedDisclaimer: (accepted) => set({ acceptedDisclaimer: accepted }),
-    windowWidth: window.innerWidth,
-    setWindowWidth: (width) => set({ windowWidth: width }),
-    disclaimerIgnored: false,
-    setDisclaimerIgnored: (ignored) => set({ disclaimerIgnored: ignored }),
-    hideOptions: {
-      postureName: false,
-      postureSanskritName: false,
-      vinyasaBuddy: false,
-      seriesName: false,
-      seriesDescription: false,
-      breath: false,
-      duration: false,
+  persist(
+    (set) => ({
+      chakraSystem: DEFAULT_CHAKRA_SYSTEM,
+      setChakraSystem: (system) => set({ chakraSystem: system }),
+      sequenceIndex: null,
+      setSequenceIndex: (index) => set({ sequenceIndex: index }),
+      acceptedDisclaimer: false,
+      setAcceptedDisclaimer: (accepted) =>
+        set({ acceptedDisclaimer: accepted }),
+      windowWidth: window.innerWidth,
+      setWindowWidth: (width) => set({ windowWidth: width }),
+      disclaimerIgnored: false,
+      setDisclaimerIgnored: (ignored) => set({ disclaimerIgnored: ignored }),
+      hideOptions: {
+        postureName: false,
+        postureSanskritName: false,
+        vinyasaBuddy: false,
+        seriesName: false,
+        seriesDescription: false,
+        breath: false,
+        duration: false,
+      },
+      updateHideOptions: (options) =>
+        set((state) => ({
+          hideOptions: { ...state.hideOptions, ...options },
+        })),
+    }),
+    {
+      name: 'cambio-store',
+      partialize: (state) => ({
+        disclaimerIgnored: state.disclaimerIgnored,
+        hideOptions: state.hideOptions,
+        sequenceIndex: state.sequenceIndex,
+      }),
     },
-    updateHideOptions: (options) =>
-      set((state) => ({
-        hideOptions: { ...state.hideOptions, ...options },
-      })),
-  }),
-  // {
-  //   name: 'cambio-store',
-  // },
-  // ),
+  ),
 );
 
 export const useChakraSystem = () => useStore((state) => state.chakraSystem);

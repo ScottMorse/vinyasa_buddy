@@ -9,8 +9,6 @@ const { Layout } = lazyNamedImport(
 
 export const App = () => (
   <ThemeProvider>
-    <Suspense fallback={null}>
-      <Layout />
-    </Suspense>
+    <Layout />
   </ThemeProvider>
 );

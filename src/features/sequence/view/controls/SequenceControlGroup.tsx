@@ -117,7 +117,13 @@ export const SequenceControlGroup = () => {
       </Select.Root>
 
       <HiddenField isHidden={hideOptions.seriesName} fieldName="Series Name">
-        <Text textStyle="sm" color="primary" fontSize={fontSize}>
+        <Text
+          textStyle="sm"
+          mt="0.25rem"
+          color="secondary"
+          fontWeight="semibold"
+          fontSize={fontSize}
+        >
           {currentSequenceItem?.group?.name}
         </Text>
       </HiddenField>
