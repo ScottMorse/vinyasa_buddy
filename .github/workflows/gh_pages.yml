@@ -6,6 +6,11 @@ on:
   - workflow_call
   - workflow_dispatch
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   deploy_gh_pages:
     environment: github-pages
@@ -30,13 +35,13 @@ jobs:
           git checkout --orphan gh-pages
           git rm -rf --dry-run .
           git rm -rf .
-          git config --global user.email "github-actions-bot@github.com"
+          git config --global user.email "github-actions-bot@users.noreply.github.com"
           git config --global user.name "GitHub Actions"
           git commit --allow-empty -m "Clean gh-pages branch"
           git push -u origin gh-pages
           cp -r /tmp/.github .github
         env:
-          GITHUB_TOKEN: ${{ secrets.PAGES_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
