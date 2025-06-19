@@ -1,4 +1,4 @@
-import type { StickFigurePosition } from './stickFigurePosition';
+import type { StickFigurePosition } from '@/features/stickFigure/stickFigurePosition';
 
 export interface PostureMetadata {
   id: string;
@@ -169,8 +169,8 @@ const POSTURE_MAP = {
   },
   downwardDogGaze: {
     id: 'downwardDogGaze',
-    name: 'Downward Facing Dog - Gaze Forward',
-    sanskritName: 'Adho Mukha Svanāsana',
+    name: 'Gaze Forward',
+    sanskritName: '',
     cues: [],
     adjustments: [],
     transitionOnly: true,
@@ -327,16 +327,16 @@ const POSTURE_MAP = {
     adjustments: [],
     stickFigurePosition: {
       rightUpperArm: {
-        shoulderAngle: 30,
+        shoulderAngle: 45,
       },
       rightLowerArm: {
-        elbowAngle: -120,
+        elbowAngle: -150,
       },
       leftUpperArm: {
-        shoulderAngle: 30,
+        shoulderAngle: 45,
       },
       leftLowerArm: {
-        elbowAngle: -120,
+        elbowAngle: -150,
       },
     },
   },
@@ -453,7 +453,7 @@ const POSTURE_MAP = {
   },
   lowPlank: {
     id: 'lowPlank',
-    name: 'Low Plank (Lower to Belly)',
+    name: 'Plank to Low Plank',
     sanskritName: 'Chaturanga',
     cues: [],
     adjustments: [],
@@ -484,6 +484,42 @@ const POSTURE_MAP = {
       },
       rightLowerArm: {
         elbowAngle: -90,
+      },
+    },
+  },
+  lowerToBelly: {
+    id: 'lowerToBelly',
+    name: 'Lower to Belly',
+    sanskritName: '',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 90,
+      },
+      leftUpperLeg: {
+        hipAngle: -85,
+      },
+      rightUpperLeg: {
+        hipAngle: 85,
+      },
+      leftLowerLeg: {
+        kneeAngle: 3,
+      },
+      rightLowerLeg: {
+        kneeAngle: -3,
+      },
+      leftUpperArm: {
+        shoulderAngle: 90,
+      },
+      rightUpperArm: {
+        shoulderAngle: 90,
+      },
+      leftLowerArm: {
+        elbowAngle: 150,
+      },
+      rightLowerArm: {
+        elbowAngle: -150,
       },
     },
   },
@@ -603,7 +639,7 @@ const POSTURE_MAP = {
   },
   threeLeggedDog: {
     id: 'threeLeggedDog',
-    name: 'Three-Legged Downward Dog',
+    name: 'Three-Legged Down Dog',
     sanskritName: 'Eka Pāda Adho Mukha Śvānāsana',
     cues: [],
     adjustments: [],
@@ -725,25 +761,6 @@ const POSTURE_MAP = {
       },
     },
   },
-  warrior2Hold: {
-    id: 'warrior2Hold',
-    name: 'Hold',
-    sanskritName: '',
-    cues: [],
-    adjustments: [],
-    transitionOnly: true,
-    stickFigurePosition: {
-      leftUpperLeg: {
-        hipAngle: 70,
-      },
-      rightUpperLeg: {
-        hipAngle: 47.5,
-      },
-      leftLowerLeg: {
-        kneeAngle: 65,
-      },
-    },
-  },
   warrior2Sink: {
     id: 'warrior2',
     name: 'Warrior 2 (Sink Down)',
@@ -764,7 +781,7 @@ const POSTURE_MAP = {
   },
   warrior2Reach: {
     id: 'warrior2Reach',
-    name: 'Warrior II (Reach Forward)',
+    name: 'Warrior 2 (Reach Forward)',
     sanskritName: 'Vīrabhadrāsana II',
     cues: [],
     adjustments: [],
@@ -945,13 +962,13 @@ const POSTURE_MAP = {
         kneeAngle: 60,
       },
       leftUpperArm: {
-        shoulderAngle: -70,
+        shoulderAngle: -85,
       },
       rightUpperArm: {
-        shoulderAngle: -110,
+        shoulderAngle: -95,
       },
       leftLowerArm: {
-        elbowAngle: 60,
+        elbowAngle: 90,
       },
       rightLowerArm: {
         elbowAngle: -60,
@@ -969,10 +986,10 @@ const POSTURE_MAP = {
         neckAngle: -10,
       },
       neck: {
-        chestAngle: -10,
+        chestAngle: -20,
       },
       chest: {
-        abdomenAngle: -10,
+        abdomenAngle: -15,
       },
       abdomen: {
         hipAngle: 80,
@@ -1126,6 +1143,76 @@ const POSTURE_MAP = {
       },
     },
   },
+  crescentLungePrayer: {
+    id: 'crescentLungePrayer',
+    name: 'Crescent Lunge Prayer Hands',
+    sanskritName: 'Āñjaneyāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      leftUpperLeg: {
+        hipAngle: 70,
+      },
+      rightUpperLeg: {
+        hipAngle: 37.5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 65,
+      },
+      rightLowerLeg: {
+        kneeAngle: -20,
+      },
+      rightUpperArm: {
+        shoulderAngle: 50,
+      },
+      rightLowerArm: {
+        elbowAngle: -140,
+      },
+      leftUpperArm: {
+        shoulderAngle: 50,
+      },
+      leftLowerArm: {
+        elbowAngle: -140,
+      },
+    },
+  },
+
+  crescentLungeLengthen: {
+    id: 'crescentLungeLengthen',
+    name: 'Lengthen Torso Forward',
+    sanskritName: 'Āñjaneyāsana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 20,
+      },
+      leftUpperLeg: {
+        hipAngle: 70,
+      },
+      rightUpperLeg: {
+        hipAngle: 37.5,
+      },
+      leftLowerLeg: {
+        kneeAngle: 65,
+      },
+      rightLowerLeg: {
+        kneeAngle: -20,
+      },
+      rightUpperArm: {
+        shoulderAngle: 50,
+      },
+      rightLowerArm: {
+        elbowAngle: -150,
+      },
+      leftUpperArm: {
+        shoulderAngle: 50,
+      },
+      leftLowerArm: {
+        elbowAngle: -140,
+      },
+    },
+  },
   revolvedCrescentLunge: {
     id: 'revolvedCrescentLunge',
     name: 'Revolved Crescent Lunge',
@@ -1149,10 +1236,10 @@ const POSTURE_MAP = {
         kneeAngle: -20,
       },
       rightUpperArm: {
-        shoulderAngle: 20,
+        shoulderAngle: 40,
       },
       rightLowerArm: {
-        elbowAngle: -155,
+        elbowAngle: -170,
       },
       leftUpperArm: {
         shoulderAngle: 20,
@@ -1185,7 +1272,7 @@ const POSTURE_MAP = {
         kneeAngle: 5,
       },
       rightLowerLeg: {
-        kneeAngle: -120,
+        kneeAngle: -130,
       },
       leftUpperArm: {
         shoulderAngle: 10,
@@ -1251,25 +1338,25 @@ const POSTURE_MAP = {
         hipAngle: 30,
       },
       rightUpperLeg: {
-        hipAngle: -40,
+        hipAngle: -60,
       },
       leftLowerLeg: {
         kneeAngle: 60,
       },
       rightLowerLeg: {
-        kneeAngle: -72,
+        kneeAngle: -75,
       },
       leftUpperArm: {
-        shoulderAngle: -25,
+        shoulderAngle: -20,
       },
       rightUpperArm: {
-        shoulderAngle: -150,
+        shoulderAngle: -155,
       },
       leftLowerArm: {
-        elbowAngle: 80,
+        elbowAngle: 110,
       },
       rightLowerArm: {
-        elbowAngle: -65,
+        elbowAngle: -50,
       },
     },
   },
@@ -1407,6 +1494,67 @@ const POSTURE_MAP = {
       },
     },
   },
+  wideForwardFold: {
+    id: 'wideForwardFold',
+    name: 'Wide Legged Forward Fold',
+    sanskritName: 'Prasarita',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 180,
+      },
+      leftUpperLeg: {
+        hipAngle: 40,
+      },
+      rightUpperLeg: {
+        hipAngle: 40,
+      },
+      leftLowerLeg: {
+        kneeAngle: 2,
+      },
+      leftUpperArm: {
+        shoulderAngle: -130,
+      },
+      rightUpperArm: {
+        shoulderAngle: -130,
+      },
+    },
+  },
+  wideForwardFoldLift: {
+    id: 'wideForwardFoldLift',
+    name: 'Lift torso, adjust feet',
+    sanskritName: '',
+    cues: [],
+    adjustments: [],
+    transitionOnly: true,
+    stickFigurePosition: {
+      abdomen: {
+        hipAngle: 180,
+      },
+      chest: {
+        abdomenAngle: 180,
+      },
+      neck: {
+        chestAngle: 180,
+      },
+      leftUpperLeg: {
+        hipAngle: 40,
+      },
+      rightUpperLeg: {
+        hipAngle: 40,
+      },
+      leftLowerLeg: {
+        kneeAngle: 2,
+      },
+      leftUpperArm: {
+        shoulderAngle: 90,
+      },
+      rightUpperArm: {
+        shoulderAngle: 90,
+      },
+    },
+  },
   goddess: {
     id: 'goddess',
     name: 'Goddess',
@@ -1430,13 +1578,13 @@ const POSTURE_MAP = {
         shoulderAngle: 30,
       },
       rightLowerArm: {
-        elbowAngle: -170,
+        elbowAngle: -150,
       },
       leftUpperArm: {
         shoulderAngle: 30,
       },
       leftLowerArm: {
-        elbowAngle: -170,
+        elbowAngle: -150,
       },
     },
   },
@@ -1509,13 +1657,13 @@ const POSTURE_MAP = {
   },
   downwardDogHipStretch: {
     id: 'downwardDogHipStretch',
-    name: 'Downward Facing Dog - Hip Stretch/Stack',
-    sanskritName: 'Adho Mukha Śvānāsana',
+    name: 'Bend Knee, Stack Hips',
+    sanskritName: '',
     cues: [],
     adjustments: [],
     stickFigurePosition: {
       abdomen: {
-        hipAngle: 137,
+        hipAngle: 140,
       },
       rightUpperLeg: {
         hipAngle: 140,
@@ -1629,7 +1777,13 @@ const POSTURE_MAP = {
     adjustments: [],
     stickFigurePosition: {
       head: {
-        neckAngle: -5,
+        neckAngle: 5,
+      },
+      neck: {
+        chestAngle: 5,
+      },
+      chest: {
+        abdomenAngle: 5,
       },
       abdomen: {
         hipAngle: 55,
@@ -1647,10 +1801,10 @@ const POSTURE_MAP = {
         kneeAngle: -10,
       },
       leftUpperArm: {
-        shoulderAngle: -20,
+        shoulderAngle: -30,
       },
       rightUpperArm: {
-        shoulderAngle: -160,
+        shoulderAngle: -150,
       },
       leftLowerArm: {
         elbowAngle: 2,
@@ -1664,6 +1818,42 @@ const POSTURE_MAP = {
     id: 'staff',
     name: 'Staff',
     sanskritName: 'Dandasana',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: -5,
+      },
+      leftUpperLeg: {
+        hipAngle: 92,
+      },
+      rightUpperLeg: {
+        hipAngle: -92,
+      },
+      leftLowerLeg: {
+        kneeAngle: 5,
+      },
+      rightLowerLeg: {
+        kneeAngle: -5,
+      },
+      leftUpperArm: {
+        shoulderAngle: 90,
+      },
+      rightUpperArm: {
+        shoulderAngle: 90,
+      },
+      leftLowerArm: {
+        elbowAngle: 2,
+      },
+      rightLowerArm: {
+        elbowAngle: -2,
+      },
+    },
+  },
+  staffLiftTorso: {
+    id: 'staffLiftTorso',
+    name: 'Lift Torso',
+    sanskritName: '',
     cues: [],
     adjustments: [],
     stickFigurePosition: {
@@ -1758,10 +1948,10 @@ const POSTURE_MAP = {
         shoulderAngle: 90,
       },
       rightUpperArm: {
-        shoulderAngle: 120,
+        shoulderAngle: 115,
       },
       rightLowerArm: {
-        elbowAngle: -60,
+        elbowAngle: -35,
       },
     },
   },
@@ -1799,6 +1989,39 @@ const POSTURE_MAP = {
       },
     },
   },
+  lowerToBack: {
+    id: 'lowerToBack',
+    name: 'Lower to Back',
+    sanskritName: '',
+    cues: [],
+    adjustments: [],
+    stickFigurePosition: {
+      head: {
+        neckAngle: 10,
+      },
+      abdomen: {
+        hipAngle: -90,
+      },
+      leftUpperLeg: {
+        hipAngle: 90,
+      },
+      leftLowerLeg: {
+        kneeAngle: 0,
+      },
+      rightUpperLeg: {
+        hipAngle: -90,
+      },
+      rightLowerLeg: {
+        kneeAngle: 0,
+      },
+      leftUpperArm: {
+        shoulderAngle: 90,
+      },
+      rightUpperArm: {
+        shoulderAngle: 90,
+      },
+    },
+  },
   corpse: {
     id: 'corpse',
     name: 'Corpse',
@@ -1807,7 +2030,7 @@ const POSTURE_MAP = {
     adjustments: [],
     stickFigurePosition: {
       head: {
-        neckAngle: 60,
+        neckAngle: 10,
       },
       abdomen: {
         hipAngle: -90,
@@ -1834,7 +2057,7 @@ const POSTURE_MAP = {
   },
 } as const satisfies Record<string, PostureMetadata>;
 
-export const getPosture = (id: PostureId | null) =>
+export const getPosture = (id: PostureId | undefined | null) =>
   id ? POSTURE_MAP[id] : null;
 
 export type PostureId = keyof typeof POSTURE_MAP;

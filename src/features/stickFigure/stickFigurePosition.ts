@@ -1,6 +1,7 @@
 export interface StickFigureConfig {
   headRadius: number;
   lineWidth: number;
+  cropToPosture?: boolean;
 }
 
 export interface CircleDisplay {
@@ -79,10 +80,10 @@ const getNeutralStickFigure = ({
   headRadius,
   lineWidth,
 }: StickFigureConfig) => {
-  const neckLength = headRadius * 1.25;
-  const upperArmLength = neckLength * 2;
+  const neckLength = headRadius;
+  const upperArmLength = neckLength * 2.5;
   const lowerArmLength = upperArmLength;
-  const torsoLength = neckLength * 4;
+  const torsoLength = neckLength * 5;
   const chestLength = torsoLength / 2;
   const abdomenLength = chestLength;
   const upperLegLength = torsoLength;
@@ -326,6 +327,8 @@ export const positionStickFigure = (
     ..._position,
   };
 
+  const spacing = config.lineWidth * 1.6;
+
   const abdomenHipAngle = -position.abdomen.hipAngle - 90;
   const abdomen = angleLine(
     neutral.abdomen.x2,
@@ -352,7 +355,7 @@ export const positionStickFigure = (
 
   const head = angleCircleOrigin(
     neck.x2,
-    neck.y2,
+    neck.y2 - spacing,
     config.headRadius,
     neckChestAngle + -position.head.neckAngle - 180,
   );
@@ -360,7 +363,7 @@ export const positionStickFigure = (
   const leftUpperArmShoulderAngle =
     chestAbdomenAngle - position.leftUpperArm.shoulderAngle - 90;
   const leftUpperArm = angleLine(
-    neck.x1 - config.lineWidth,
+    neck.x1 - spacing,
     neck.y1,
     neutral.leftUpperArm.length,
     leftUpperArmShoulderAngle,
@@ -376,7 +379,7 @@ export const positionStickFigure = (
   const rightUpperArmShoulderAngle =
     chestAbdomenAngle + position.rightUpperArm.shoulderAngle + 90;
   const rightUpperArm = angleLine(
-    neck.x1 + config.lineWidth,
+    neck.x1 + spacing,
     neck.y1,
     neutral.rightUpperArm.length,
     rightUpperArmShoulderAngle,
@@ -391,7 +394,7 @@ export const positionStickFigure = (
 
   const leftUpperLegHipAngle = position.leftUpperLeg.hipAngle - 270;
   const leftUpperLeg = angleLine(
-    abdomen.x1 - config.lineWidth,
+    abdomen.x1 - spacing,
     abdomen.y1,
     neutral.leftUpperLeg.length,
     leftUpperLegHipAngle,
@@ -406,7 +409,7 @@ export const positionStickFigure = (
 
   const rightUpperLegHipAngle = -position.rightUpperLeg.hipAngle + 90;
   const rightUpperLeg = angleLine(
-    abdomen.x1 + config.lineWidth,
+    abdomen.x1 + spacing,
     abdomen.y1,
     neutral.rightUpperLeg.length,
     rightUpperLegHipAngle,
@@ -440,8 +443,9 @@ export const positionStickFigure = (
     rightLowerLeg,
   };
 
-  const lowestPoint = Math.max(
+  const allYs = [
     result.head.y + result.head.radius,
+    result.head.y - result.head.radius,
     result.neck.y1,
     result.neck.y2,
     result.chest.y1,
@@ -453,13 +457,21 @@ export const positionStickFigure = (
     result.leftLowerArm.y1,
     result.leftLowerArm.y2,
     result.rightUpperArm.y1,
+    result.rightUpperArm.y2,
+    result.rightLowerArm.y1,
+    result.rightLowerArm.y2,
+    result.leftUpperLeg.y1,
     result.leftUpperLeg.y2,
+    result.rightUpperLeg.y1,
     result.rightUpperLeg.y2,
+    result.leftLowerLeg.y1,
     result.leftLowerLeg.y2,
+    result.rightLowerLeg.y1,
     result.rightLowerLeg.y2,
-  );
+  ];
 
-  const leftmostPoint = Math.min(
+  const allXs = [
+    result.head.x + result.head.radius,
     result.head.x - result.head.radius,
     result.neck.x1,
     result.neck.x2,
@@ -467,6 +479,14 @@ export const positionStickFigure = (
     result.chest.x2,
     result.abdomen.x1,
     result.abdomen.x2,
+    result.leftUpperArm.x1,
+    result.leftUpperArm.x2,
+    result.leftLowerArm.x1,
+    result.leftLowerArm.x2,
+    result.rightUpperArm.x1,
+    result.rightUpperArm.x2,
+    result.rightLowerArm.x1,
+    result.rightLowerArm.x2,
     result.leftUpperLeg.x1,
     result.leftUpperLeg.x2,
     result.rightUpperLeg.x1,
@@ -475,54 +495,37 @@ export const positionStickFigure = (
     result.leftLowerLeg.x2,
     result.rightLowerLeg.x1,
     result.rightLowerLeg.x2,
-    result.leftUpperArm.x1,
-    result.leftUpperArm.x2,
-    result.rightUpperArm.x1,
-    result.rightUpperArm.x2,
-    result.leftLowerArm.x1,
-    result.leftLowerArm.x2,
-    result.rightLowerArm.x1,
-    result.rightLowerArm.x2,
-  );
+  ];
 
-  const rightmostPoint = Math.max(
-    result.head.x + result.head.radius,
-    result.neck.x1,
-    result.neck.x2,
-    result.chest.x1,
-    result.chest.x2,
-    result.abdomen.x1,
-    result.abdomen.x2,
-    result.leftUpperLeg.x1,
-    result.leftUpperLeg.x2,
-    result.rightUpperLeg.x1,
-    result.rightUpperLeg.x2,
-    result.leftLowerLeg.x1,
-    result.leftLowerLeg.x2,
-    result.rightLowerLeg.x1,
-    result.rightLowerLeg.x2,
-    result.leftUpperArm.x1,
-    result.leftUpperArm.x2,
-    result.rightUpperArm.x1,
-    result.rightUpperArm.x2,
-    result.leftLowerArm.x1,
-    result.leftLowerArm.x2,
-    result.rightLowerArm.x1,
-    result.rightLowerArm.x2,
-  );
+  const highestPoint = Math.min(...allYs);
+  const lowestPoint = Math.max(...allYs);
+  const leftmostPoint = Math.min(...allXs);
+  const rightmostPoint = Math.max(...allXs);
 
-  const floorY = result.height - config.lineWidth;
-  const yOffset = floorY - lowestPoint - config.lineWidth;
+  const figureHeight = lowestPoint - highestPoint;
+  const figureWidth = rightmostPoint - leftmostPoint;
 
-  const figureMiddle = (rightmostPoint - leftmostPoint) / 2 + leftmostPoint;
-  const xOffset = result.width / 2 - figureMiddle;
+  const height = config.cropToPosture
+    ? figureHeight + config.lineWidth * 2 + spacing * 2
+    : result.height;
+  const width = config.cropToPosture
+    ? figureWidth + config.lineWidth * 2 + spacing * 2
+    : result.width;
+
+  const floorY = height - config.lineWidth;
+  const yOffset = floorY - lowestPoint - spacing;
+
+  const figureMiddle = figureWidth / 2 + leftmostPoint;
+  const xOffset = width / 2 - figureMiddle;
 
   return {
     ...result,
+    width,
+    height,
     floor: {
-      x1: 0,
+      x1: config.lineWidth,
       y1: floorY,
-      x2: result.width,
+      x2: result.width - config.lineWidth,
       y2: floorY,
     },
     head: {

@@ -4,6 +4,8 @@ import { ReactRefreshRspackPlugin } from '@rspack/plugin-react-refresh';
 
 const isDev = process.env.NODE_ENV === 'development';
 
+const STATIC_DIR = `${__dirname}/public`;
+
 // Target browsers, see: https://github.com/browserslist/browserslist
 const targets = ['last 2 versions', '> 0.2%', 'not dead', 'Firefox ESR'];
 
@@ -11,12 +13,16 @@ export default defineConfig({
   devServer: {
     port: 3000,
     open: true,
+    static: {
+      directory: STATIC_DIR,
+    },
   },
   entry: {
     main: './src/main.tsx',
   },
   resolve: {
-    extensions: ['...', '.ts', '.tsx', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.jsx'],
+    tsConfig: `${__dirname}/tsconfig.json`,
   },
   module: {
     rules: [
@@ -55,6 +61,13 @@ export default defineConfig({
       template: './index.html',
     }),
     isDev ? new ReactRefreshRspackPlugin() : null,
+    new rspack.CopyRspackPlugin({
+      patterns: [
+        {
+          from: STATIC_DIR,
+        },
+      ],
+    }),
   ].filter(Boolean),
   optimization: {
     minimizer: [
