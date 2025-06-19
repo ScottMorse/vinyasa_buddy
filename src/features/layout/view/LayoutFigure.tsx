@@ -29,6 +29,8 @@ export const LayoutFigure = () => {
           color="secondary"
           fontWeight="bold"
           position="absolute"
+          py="2.5rem"
+          px="1.65rem"
           variant="outline"
           opacity={prev ? 1 : 0}
           left={{ base: '-4rem', sm: '0rem', md: '-2rem' }}
@@ -37,7 +39,7 @@ export const LayoutFigure = () => {
           zIndex={1}
           aria-label="Previous posture"
         >
-          <Icon as={FaArrowLeft} />
+          <Icon width="1.75rem" height="1.75rem" as={FaArrowLeft} />
         </Button>
         <HiddenField
           isHidden={hideOptions.vinyasaBuddy}
@@ -67,13 +69,15 @@ export const LayoutFigure = () => {
             variant="outline"
             opacity={next ? 1 : 0}
             disabled={!next}
+            py="2.5rem"
+            px="1.65rem"
             onClick={() => next && setSequenceIndex(next.index)}
             zIndex={1}
             position="absolute"
             right={{ base: '-4rem', sm: '0rem', md: '-2rem' }}
             aria-label="Next posture"
           >
-            <Icon as={FaArrowRight} />
+            <Icon width="1.75rem" height="1.75rem" as={FaArrowRight} />
           </Button>
         )}
       </HStack>

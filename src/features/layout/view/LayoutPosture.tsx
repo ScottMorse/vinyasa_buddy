@@ -2,7 +2,7 @@ import { HiddenField } from '@/features/hide/view';
 import { getPosture } from '@/features/posture';
 import { useCurrentSequenceItem } from '@/features/sequence';
 import { useHideOptions, useSetSequenceIndex } from '@/features/store';
-import { Button, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Stack, Text } from '@chakra-ui/react';
 import capitalize from 'lodash/capitalize';
 
 export const LayoutPosture = () => {
@@ -13,8 +13,8 @@ export const LayoutPosture = () => {
 
   const setSequenceIndex = useSetSequenceIndex();
 
-  const fontSize = { base: '2.5rem', md: '3.5rem' };
-  const smallFontSize = { base: '1.6rem', md: '2rem' };
+  const fontSize = { base: '2rem', sm: '2.25rem', md: '3.5rem' };
+  const smallFontSize = { base: '1.4rem', sm: '1.6rem', md: '2rem' };
 
   return (
     <Stack
@@ -31,8 +31,9 @@ export const LayoutPosture = () => {
       {!posture && (
         <Button
           position="absolute"
-          top="2rem"
-          color="success"
+          top="-4rem"
+          color="primary"
+          fontWeight="semibold"
           zIndex={1}
           onClick={() => setSequenceIndex(0)}
         >
@@ -44,9 +45,26 @@ export const LayoutPosture = () => {
           isHidden={hideOptions.postureName}
           fieldName="Posture Name"
         >
-          <Text textStyle="xl" minW="30rem" fontSize={fontSize}>
-            {posture.name || 'N/A'}
-            {sequenceItem?.side && ` - ${capitalize(sequenceItem.side)} Side`}
+          <Text
+            textStyle="xl"
+            minW="30rem"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            fontSize={fontSize}
+          >
+            {posture.name || 'N/A'}{' '}
+            {sequenceItem?.side && (
+              <Box
+                as="span"
+                color={sequenceItem?.side === 'Right' ? 'manilla' : 'success'}
+                mr="-3rem"
+                ml="0.75rem"
+                fontSize={smallFontSize}
+              >
+                {sequenceItem.side} Side
+              </Box>
+            )}
           </Text>
         </HiddenField>
       ) : (
@@ -70,7 +88,7 @@ export const LayoutPosture = () => {
           </Text>
         </HiddenField>
       ) : (
-        <Text textStyle="xl" opacity={0} fontSize={fontSize}>
+        <Text textStyle="xl" opacity={0} mt="0.75rem" fontSize={fontSize}>
           N/A
         </Text>
       )}
@@ -88,7 +106,7 @@ export const LayoutPosture = () => {
           </HiddenField>
         </Stack>
       ) : (
-        <Text textStyle="xl" mt="0.25rem" opacity={0} fontSize={smallFontSize}>
+        <Text textStyle="xl" mt="1.5rem" opacity={0} fontSize={smallFontSize}>
           N/A
         </Text>
       )}

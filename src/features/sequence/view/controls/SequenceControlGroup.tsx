@@ -25,6 +25,7 @@ export const SequenceControlGroup = () => {
   const hideOptions = useHideOptions();
 
   const fontSize = { base: '1.4rem', sm: '1.6rem', md: '2rem' };
+  const descriptionFontSize = { base: '1.2rem', sm: '1.4rem', md: '1.6rem' };
 
   return (
     <Stack gap="0.5rem">
@@ -140,19 +141,20 @@ export const SequenceControlGroup = () => {
         >
           <Text
             textStyle="sm"
-            maxWidth="15rem"
+            maxWidth="16rem"
             maxLines={2}
             minHeight="1.5rem"
             maxHeight="1.5rem"
             display="block"
             overflowY="visible"
             color="textSecondary"
+            fontSize={descriptionFontSize}
           >
             {currentSequenceItem?.group.description}
           </Text>
         </HiddenField>
       ) : (
-        <Text textStyle="sm" opacity={0}>
+        <Text textStyle="sm" minHeight="2rem" opacity={0}>
           N/A
         </Text>
       )}
