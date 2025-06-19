@@ -24,6 +24,7 @@ export default defineConfig({
     chunkFilename: '[name].[contenthash].js',
     path: `${__dirname}/build`,
     publicPath: PUBLIC_PATH,
+    clean: true,
   },
   entry: {
     main: './src/main.tsx',
