@@ -42,7 +42,6 @@ export const Layout = () => {
     <Stack
       minH="100dvh"
       w="100vw"
-      pb="10rem"
       align="center"
       tabIndex={-1}
       onKeyDown={({ key }) => {
@@ -60,7 +59,14 @@ export const Layout = () => {
         <LayoutPosture />
       </Stack>
       <LayoutFigure />
-      <Stack mt="3rem">
+      <Stack
+        pt="3rem"
+        flex={1}
+        pb="10rem"
+        bg="backgroundDark"
+        w="100vw"
+        align="center"
+      >
         <HideControls />
       </Stack>
     </Stack>

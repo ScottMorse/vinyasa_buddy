@@ -47,13 +47,12 @@ export const DARK_THEME = createSystem(
       tokens: {
         colors: {
           primary: { value: '#FF8D85' },
-          // primary: { value: '#FFA472' },
-          // secondary: { value: '#7678ED' },
           secondary: { value: '#898BF9' },
           success: { value: '#14CC92' },
           manilla: { value: '#F6D0B1' },
-          background: { value: '#0E131B ' },
+          background: { value: '#10151e ' },
           backgroundSecondary: { value: '#18212f' },
+          backgroundDark: { value: '#0f131a' },
           textPrimary: { value: '#cdd6e5' },
           textContrast: { value: '#121212' },
           textSecondary: { value: '#98abca' },
