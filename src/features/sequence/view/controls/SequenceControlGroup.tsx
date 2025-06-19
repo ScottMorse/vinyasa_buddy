@@ -72,7 +72,7 @@ export const SequenceControlGroup = () => {
             bg="backgroundSecondary"
             color="textPrimary"
             minW="30rem"
-            minH="55rem"
+            minH="min(55rem, (100dvh - 20rem))"
             _scrollbar={{
               bg: 'background',
               color: 'textPrimary',

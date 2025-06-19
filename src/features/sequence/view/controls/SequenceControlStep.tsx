@@ -99,7 +99,7 @@ export const SequenceControlStep = () => {
           borderRadius="xl"
           color="textPrimary"
           minW="30rem"
-          minH="80vh"
+          minH="min(80vh, (100dvh - 20rem))"
           transform="translateX(-12rem)"
           _scrollbar={{
             bg: 'background',
