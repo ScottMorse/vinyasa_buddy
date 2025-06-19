@@ -38,8 +38,6 @@ const useLocalStore = create<LocalStoreState>()(
     (set) => ({
       chakraSystem: DEFAULT_CHAKRA_SYSTEM,
       setChakraSystem: (system) => set({ chakraSystem: system }),
-      sequenceIndex: null,
-      setSequenceIndex: (index) => set({ sequenceIndex: index }),
       acceptedDisclaimer: false,
       setAcceptedDisclaimer: (accepted) =>
         set({ acceptedDisclaimer: accepted }),

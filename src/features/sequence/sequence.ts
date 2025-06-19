@@ -672,12 +672,12 @@ export const SEQUENCE_GROUP_MAP = {
       {
         posture: 'reclinedBoundSitUp',
         duration: '',
-        breath: 'Lift on Exhale, lower on Inhale',
+        breath: 'Lift on Exhale, lower on inhale',
       },
       {
         posture: 'bicycle',
         duration: '',
-        breath: 'Side - Exhale, Center - Inhale',
+        breath: 'Exhale on side, inhale on center',
       },
       {
         posture: 'boat',
@@ -687,7 +687,7 @@ export const SEQUENCE_GROUP_MAP = {
       {
         posture: 'bridge',
         duration: '',
-        breath: '(Inhale on lift, Exhale on lower)',
+        breath: 'Inhale on lift, exhale on lower',
       },
       {
         posture: 'downwardDog',
