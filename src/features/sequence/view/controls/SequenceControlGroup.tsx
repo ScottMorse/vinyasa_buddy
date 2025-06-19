@@ -121,6 +121,8 @@ export const SequenceControlGroup = () => {
           textStyle="sm"
           mt="0.25rem"
           color="secondary"
+          maxWidth="10rem"
+          whiteSpace="nowrap"
           fontWeight="semibold"
           fontSize={fontSize}
         >
@@ -134,7 +136,8 @@ export const SequenceControlGroup = () => {
         >
           <Text
             textStyle="sm"
-            maxWidth="20rem"
+            maxWidth="15rem"
+            maxLines={2}
             minHeight="1.5rem"
             maxHeight="1.5rem"
             display="block"
