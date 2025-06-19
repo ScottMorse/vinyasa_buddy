@@ -73,8 +73,7 @@ export default defineConfig({
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    ${PUBLIC_PATH === '/' ? '' : `<base href="${PUBLIC_PATH}" />`}
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href="${PUBLIC_PATH}/favicon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Vinyasa Buddy</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
