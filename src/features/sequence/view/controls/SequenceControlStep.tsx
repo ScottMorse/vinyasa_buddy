@@ -52,7 +52,7 @@ export const SequenceControlStep = () => {
   const sequenceIndex = useSequenceIndex();
   const setSequenceIndex = useSetSequenceIndex();
 
-  const fontSize = { base: '1.6rem', md: '2rem' };
+  const fontSize = { base: '1.4rem', sm: '1.6rem', md: '2rem' };
 
   return (
     <Select.Root
