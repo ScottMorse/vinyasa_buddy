@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import type { SystemContext } from '@chakra-ui/react';
 import { DEFAULT_CHAKRA_SYSTEM } from '@/features/chakra/theme/defaultSystem';
 
@@ -28,7 +28,12 @@ interface StoreState {
   updateHideOptions: (options: Partial<HideOptions>) => void;
 }
 
-const useStore = create<StoreState>()(
+type SessionKeys = 'sequenceIndex' | 'setSequenceIndex';
+
+type LocalStoreState = Omit<StoreState, SessionKeys>;
+type SessionStoreState = Pick<StoreState, SessionKeys>;
+
+const useLocalStore = create<LocalStoreState>()(
   persist(
     (set) => ({
       chakraSystem: DEFAULT_CHAKRA_SYSTEM,
@@ -57,38 +62,55 @@ const useStore = create<StoreState>()(
         })),
     }),
     {
-      name: 'cambio-store',
+      name: 'vb-store',
       partialize: (state) => ({
         disclaimerIgnored: state.disclaimerIgnored,
         hideOptions: state.hideOptions,
-        sequenceIndex: state.sequenceIndex,
       }),
     },
   ),
 );
 
-export const useChakraSystem = () => useStore((state) => state.chakraSystem);
-export const useSetChakraSystem = () =>
-  useStore((state) => state.setChakraSystem);
+export const useSessionStore = create<SessionStoreState>()(
+  persist(
+    (set) => ({
+      sequenceIndex: null,
+      setSequenceIndex: (index) => set({ sequenceIndex: index }),
+    }),
+    {
+      name: 'vb-session-store',
+      partialize: (state) => ({
+        sequenceIndex: state.sequenceIndex,
+      }),
+      storage: createJSONStorage(() => sessionStorage),
+    },
+  ),
+);
 
-export const useSequenceIndex = () => useStore((state) => state.sequenceIndex);
+export const useChakraSystem = () =>
+  useLocalStore((state) => state.chakraSystem);
+export const useSetChakraSystem = () =>
+  useLocalStore((state) => state.setChakraSystem);
+
+export const useSequenceIndex = () =>
+  useSessionStore((state) => state.sequenceIndex);
 export const useSetSequenceIndex = () =>
-  useStore((state) => state.setSequenceIndex);
+  useSessionStore((state) => state.setSequenceIndex);
 
 export const useAcceptedDisclaimer = () =>
-  useStore((state) => state.acceptedDisclaimer);
+  useLocalStore((state) => state.acceptedDisclaimer);
 export const useSetAcceptedDisclaimer = () =>
-  useStore((state) => state.setAcceptedDisclaimer);
+  useLocalStore((state) => state.setAcceptedDisclaimer);
 
 export const useDisclaimerIgnored = () =>
-  useStore((state) => state.disclaimerIgnored);
+  useLocalStore((state) => state.disclaimerIgnored);
 export const useSetDisclaimerIgnored = () =>
-  useStore((state) => state.setDisclaimerIgnored);
+  useLocalStore((state) => state.setDisclaimerIgnored);
 
-export const useWindowWidth = () => useStore((state) => state.windowWidth);
+export const useWindowWidth = () => useLocalStore((state) => state.windowWidth);
 export const useSetWindowWidth = () =>
-  useStore((state) => state.setWindowWidth);
+  useLocalStore((state) => state.setWindowWidth);
 
-export const useHideOptions = () => useStore((state) => state.hideOptions);
+export const useHideOptions = () => useLocalStore((state) => state.hideOptions);
 export const useUpdateHideOptions = () =>
-  useStore((state) => state.updateHideOptions);
+  useLocalStore((state) => state.updateHideOptions);
