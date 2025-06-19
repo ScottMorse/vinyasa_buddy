@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-workflow.json
+
+name: GitHub Pages Deployment
+
+on:
+  - workflow_call
+  - workflow_dispatch
+
+jobs:
+  deploy_gh_pages:
+    environment: github-pages
+    name: GitHub Pages Deployment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Project
+        uses: ./.github/actions/setup
+      - name: Run build
+        run: |
+          bun run build
+          echo "/* /index.html 200\n" >> ./build/_redirects
+          touch ./build/.nojekyll
+        env:
+          PUBLIC_PATH: /web
+
+      - name: Clean gh-pages branch
+        run: |
+          cp -r .github /tmp/.github
+          git push origin --delete gh-pages
+          git checkout --orphan gh-pages
+          git rm -rf --dry-run .
+          git rm -rf .
+          git config --global user.email "github-actions-bot@github.com"
+          git config --global user.name "GitHub Actions"
+          git commit --allow-empty -m "Clean gh-pages branch"
+          git push -u origin gh-pages
+          cp -r /tmp/.github .github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build

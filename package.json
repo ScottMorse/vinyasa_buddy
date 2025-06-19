@@ -2,6 +2,7 @@
   "name": "biome",
   "private": true,
   "version": "1.0.0",
+  "bunVersion": "1.2.15",
   "scripts": {
     "build": "rspack build",
     "check": "biome check --write",
