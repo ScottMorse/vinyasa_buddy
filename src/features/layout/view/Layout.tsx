@@ -42,6 +42,7 @@ export const Layout = () => {
     <Stack
       minH="100dvh"
       w="100vw"
+      pb="10rem"
       align="center"
       tabIndex={-1}
       onKeyDown={({ key }) => {
