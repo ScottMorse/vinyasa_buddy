@@ -115,23 +115,23 @@ export const SequenceControlStep = () => {
             <Select.ItemGroup
               key={`sequence-control-step-group-${groupId}`}
               borderBottom="2px solid"
-              borderColor="secondary"
+              borderColor="textSecondary"
             >
               <Select.ItemGroupLabel
                 fontSize="1.9rem"
-                fontWeight="semibold"
-                color="textSecondary"
+                fontWeight="normal"
+                color="secondary"
                 borderBottom="2px solid"
-                borderColor="secondary"
+                borderColor="textSecondary"
               >
                 {name}
               </Select.ItemGroupLabel>
-              {items.map((item) => (
+              {items.map((item, i) => (
                 <Select.Item
                   item={item}
                   key={`sequence-control-step-item-${item.value}`}
                   cursor="pointer"
-                  borderBottom="1px solid"
+                  borderBottom={i === items.length - 1 ? 'none' : '1px solid'}
                   borderColor="textSecondary"
                   py="0.5rem"
                   px="1rem"
@@ -139,10 +139,13 @@ export const SequenceControlStep = () => {
                   fontSize={fontSize}
                   _hover={{
                     bg: 'secondary',
+                    _selected: {
+                      bg: 'primary',
+                    },
                     color: 'background',
                   }}
                   _selected={{
-                    bg: 'secondary',
+                    bg: 'primary',
                     color: 'background',
                   }}
                 >

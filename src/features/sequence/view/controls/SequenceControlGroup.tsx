@@ -87,11 +87,11 @@ export const SequenceControlGroup = () => {
               <Select.Item
                 key={item?.id}
                 item={item}
-                border="2px solid"
-                borderBottom={
-                  i === collection.items.length - 1 ? '2px solid' : 'none'
-                }
-                borderColor="secondary"
+                borderBottom="1px solid"
+                borderColor="textSecondary"
+                ml="-0.5rem"
+                px="1rem"
+                py="0.5rem"
                 cursor="pointer"
                 fontSize={fontSize}
                 onClick={() => {
@@ -101,10 +101,13 @@ export const SequenceControlGroup = () => {
                 }}
                 _hover={{
                   bg: 'secondary',
+                  _selected: {
+                    bg: 'primary',
+                  },
                   color: 'background',
                 }}
                 _selected={{
-                  bg: 'secondary',
+                  bg: 'primary',
                   color: 'background',
                 }}
               >
