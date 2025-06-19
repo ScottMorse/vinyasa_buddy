@@ -12,6 +12,7 @@ export const DARK_THEME = createSystem(
     globalCss: {
       html: {
         fontSize: '62.5%',
+        backgroundColor: 'var(--chakra-colors-backgroundDark)',
       },
       body: {
         fontSize: '1.6rem',
