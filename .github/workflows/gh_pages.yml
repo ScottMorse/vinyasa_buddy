@@ -36,9 +36,9 @@ jobs:
           git push -u origin gh-pages
           cp -r /tmp/.github .github
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAGES_GITHUB_TOKEN }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAGES_GITHUB_TOKEN }}
           publish_dir: ./build
