@@ -63,7 +63,7 @@ export const LayoutPosture = () => {
             textStyle="xl"
             minW="30rem"
             color="primary"
-            mt="1rem"
+            mt="2rem"
             fontSize={fontSize}
           >
             {posture.sanskritName}

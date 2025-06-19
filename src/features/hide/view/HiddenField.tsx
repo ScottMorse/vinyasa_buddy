@@ -1,4 +1,5 @@
 import { useInterval } from '@/utils/hooks';
+import { useIsFirstRender } from '@/utils/hooks/rendering';
 import { Box, Stack, Text } from '@chakra-ui/react';
 import { type Scope, animate, createScope } from 'animejs';
 import { useEffect, useRef, type ReactNode } from 'react';
@@ -21,45 +22,43 @@ export const HiddenField = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const scope = useRef<Scope>(null);
 
+  const isInitializing = useRef(true);
+
   useEffect(() => {
     scope.current = createScope({ root }).add((self) => {
+      if (isInitializing.current) {
+        isInitializing.current = false;
+        return;
+      }
       animate('.hidden-field', {
         opacity: isHidden ? 1 : 0,
+        duration: 500,
+      });
+      animate('.hidden-field-wrapper', {
+        opacity: {
+          from: isHidden ? 1 : 0,
+          to: isHidden ? 0 : 1,
+        },
         duration: 500,
       });
     });
   }, [isHidden]);
 
-  useInterval({
-    duration: 100,
-    callback: () => {
-      if (hiderRef.current && wrapperRef.current) {
-        hiderRef.current.style.width = `${wrapperRef.current.scrollWidth}px`;
-        hiderRef.current.style.height = `${wrapperRef.current.scrollHeight}px`;
-      }
-    },
-    enabled: true,
-  });
-
   return (
-    <Stack
+    <Box
       width="fit-content"
       height="fit-content"
       position="relative"
-      align="center"
-      justify="center"
       ref={root}
     >
       <Stack
         className="hidden-field"
         position="absolute"
         pointerEvents="none"
-        top="-0.5rem"
-        width="100%"
-        height="100%"
+        minWidth="100%"
+        minHeight="100%"
         bg="backgroundSecondary"
         borderRadius="xl"
-        p="0.5rem"
         boxSizing="content-box"
         align="center"
         justify="center"
@@ -71,14 +70,20 @@ export const HiddenField = ({
           color="textPrimary"
           opacity={0.65}
           whiteSpace="nowrap"
-          m="0.5rem"
         >
           {fieldName} Hidden
         </Text>
       </Stack>
-      <Box width="fit-content" height="fit-content" ref={wrapperRef}>
+      <Box
+        width="fit-content"
+        height="fit-content"
+        m="0.25rem"
+        className="hidden-field-wrapper"
+        ref={wrapperRef}
+        opacity={initialIsHidden ? 0 : 1}
+      >
         {children}
       </Box>
-    </Stack>
+    </Box>
   );
 };
