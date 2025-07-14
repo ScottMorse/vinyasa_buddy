@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { SystemContext } from '@chakra-ui/react';
 import { DEFAULT_CHAKRA_SYSTEM } from '@/features/chakra/theme/defaultSystem';
+import type { PostureId } from '../posture';
 
 export interface HideOptions {
   postureName: boolean;
@@ -14,56 +15,104 @@ export interface HideOptions {
 }
 
 interface StoreState {
-  chakraSystem: SystemContext;
-  setChakraSystem: (system: SystemContext) => void;
-  sequenceIndex: number | null;
-  setSequenceIndex: (index: number | null) => void;
-  acceptedDisclaimer: boolean;
-  setAcceptedDisclaimer: (accepted: boolean) => void;
-  disclaimerIgnored: boolean;
-  setDisclaimerIgnored: (ignored: boolean) => void;
-  windowWidth: number;
-  setWindowWidth: (width: number) => void;
-  hideOptions: HideOptions;
-  updateHideOptions: (options: Partial<HideOptions>) => void;
+  theme: {
+    chakraSystem: SystemContext;
+    setChakraSystem: (system: SystemContext) => void;
+  };
+  sequence: {
+    index: number | null;
+    setIndex: (index: number | null) => void;
+  };
+  disclaimer: {
+    acceptedDisclaimer: boolean;
+    setAcceptedDisclaimer: (accepted: boolean) => void;
+    disclaimerIgnored: boolean;
+    setDisclaimerIgnored: (ignored: boolean) => void;
+  };
+  layout: {
+    windowWidth: number;
+    setWindowWidth: (width: number) => void;
+  };
+  hide: {
+    options: HideOptions;
+    updateOptions: (options: Partial<HideOptions>) => void;
+  };
+  details: {
+    selectedPosture: PostureId;
+    setSelectedPosture: (posture: PostureId) => void;
+    isDetailsModalOpen: boolean;
+    setIsDetailsModalOpen: (isOpen: boolean) => void;
+  };
 }
 
-type SessionKeys = 'sequenceIndex' | 'setSequenceIndex';
-
-type LocalStoreState = Omit<StoreState, SessionKeys>;
-type SessionStoreState = Pick<StoreState, SessionKeys>;
+type LocalStoreState = Omit<StoreState, 'sequence'>;
+type SessionStoreState = Pick<StoreState, 'sequence'>;
 
 const useLocalStore = create<LocalStoreState>()(
   persist(
     (set) => ({
-      chakraSystem: DEFAULT_CHAKRA_SYSTEM,
-      setChakraSystem: (system) => set({ chakraSystem: system }),
-      acceptedDisclaimer: false,
-      setAcceptedDisclaimer: (accepted) =>
-        set({ acceptedDisclaimer: accepted }),
-      windowWidth: window.innerWidth,
-      setWindowWidth: (width) => set({ windowWidth: width }),
-      disclaimerIgnored: false,
-      setDisclaimerIgnored: (ignored) => set({ disclaimerIgnored: ignored }),
-      hideOptions: {
-        postureName: false,
-        postureSanskritName: false,
-        vinyasaBuddy: false,
-        seriesName: false,
-        seriesDescription: false,
-        breath: false,
-        duration: false,
+      theme: {
+        chakraSystem: DEFAULT_CHAKRA_SYSTEM,
+        setChakraSystem: (system) =>
+          set((state) => ({
+            theme: { ...state.theme, chakraSystem: system },
+          })),
       },
-      updateHideOptions: (options) =>
-        set((state) => ({
-          hideOptions: { ...state.hideOptions, ...options },
-        })),
+      disclaimer: {
+        acceptedDisclaimer: false,
+        setAcceptedDisclaimer: (accepted) =>
+          set((state) => ({
+            disclaimer: { ...state.disclaimer, acceptedDisclaimer: accepted },
+          })),
+        disclaimerIgnored: false,
+        setDisclaimerIgnored: (ignored) =>
+          set((state) => ({
+            disclaimer: { ...state.disclaimer, disclaimerIgnored: ignored },
+          })),
+      },
+      layout: {
+        windowWidth: window.innerWidth,
+        setWindowWidth: (width) =>
+          set((state) => ({
+            layout: { ...state.layout, windowWidth: width },
+          })),
+      },
+      hide: {
+        options: {
+          postureName: false,
+          postureSanskritName: false,
+          vinyasaBuddy: false,
+          seriesName: false,
+          seriesDescription: false,
+          breath: false,
+          duration: false,
+        },
+        updateOptions: (options) =>
+          set((state) => ({
+            hide: { ...state.hide, ...options },
+          })),
+      },
+      details: {
+        selectedPosture: 'child',
+        setSelectedPosture: (posture) =>
+          set((state) => ({
+            details: { ...state.details, selectedPosture: posture },
+          })),
+        isDetailsModalOpen: true,
+        setIsDetailsModalOpen: (isOpen) =>
+          set((state) => ({
+            details: { ...state.details, isDetailsModalOpen: isOpen },
+          })),
+      },
     }),
     {
       name: 'vb-store',
       partialize: (state) => ({
-        disclaimerIgnored: state.disclaimerIgnored,
-        hideOptions: state.hideOptions,
+        disclaimer: {
+          acceptedDisclaimer: state.disclaimer.acceptedDisclaimer,
+          disclaimerIgnored: state.disclaimer.disclaimerIgnored,
+        },
+        hide: state.hide,
       }),
     },
   ),
@@ -72,13 +121,20 @@ const useLocalStore = create<LocalStoreState>()(
 export const useSessionStore = create<SessionStoreState>()(
   persist(
     (set) => ({
-      sequenceIndex: null,
-      setSequenceIndex: (index) => set({ sequenceIndex: index }),
+      sequence: {
+        index: null,
+        setIndex: (index) =>
+          set((state) => ({
+            sequence: { ...state.sequence, index },
+          })),
+      },
     }),
     {
       name: 'vb-session-store',
       partialize: (state) => ({
-        sequenceIndex: state.sequenceIndex,
+        sequence: {
+          index: state.sequence.index,
+        },
       }),
       storage: createJSONStorage(() => sessionStorage),
     },
@@ -86,29 +142,42 @@ export const useSessionStore = create<SessionStoreState>()(
 );
 
 export const useChakraSystem = () =>
-  useLocalStore((state) => state.chakraSystem);
+  useLocalStore((state) => state.theme.chakraSystem);
 export const useSetChakraSystem = () =>
-  useLocalStore((state) => state.setChakraSystem);
+  useLocalStore((state) => state.theme.setChakraSystem);
 
 export const useSequenceIndex = () =>
-  useSessionStore((state) => state.sequenceIndex);
+  useSessionStore((state) => state.sequence.index);
 export const useSetSequenceIndex = () =>
-  useSessionStore((state) => state.setSequenceIndex);
+  useSessionStore((state) => state.sequence.setIndex);
 
 export const useAcceptedDisclaimer = () =>
-  useLocalStore((state) => state.acceptedDisclaimer);
+  useLocalStore((state) => state.disclaimer.acceptedDisclaimer);
 export const useSetAcceptedDisclaimer = () =>
-  useLocalStore((state) => state.setAcceptedDisclaimer);
+  useLocalStore((state) => state.disclaimer.setAcceptedDisclaimer);
 
 export const useDisclaimerIgnored = () =>
-  useLocalStore((state) => state.disclaimerIgnored);
+  useLocalStore((state) => state.disclaimer.disclaimerIgnored);
 export const useSetDisclaimerIgnored = () =>
-  useLocalStore((state) => state.setDisclaimerIgnored);
+  useLocalStore((state) => state.disclaimer.setDisclaimerIgnored);
 
-export const useWindowWidth = () => useLocalStore((state) => state.windowWidth);
+export const useWindowWidth = () =>
+  useLocalStore((state) => state.layout.windowWidth);
 export const useSetWindowWidth = () =>
-  useLocalStore((state) => state.setWindowWidth);
+  useLocalStore((state) => state.layout.setWindowWidth);
 
-export const useHideOptions = () => useLocalStore((state) => state.hideOptions);
+export const useHideOptions = () =>
+  useLocalStore((state) => state.hide.options);
 export const useUpdateHideOptions = () =>
-  useLocalStore((state) => state.updateHideOptions);
+  useLocalStore((state) => state.hide.updateOptions);
+
+export const postureDetails = {
+  useIsModalOpen: () =>
+    useLocalStore((state) => state.details.isDetailsModalOpen),
+  useSetIsModalOpen: () =>
+    useLocalStore((state) => state.details.setIsDetailsModalOpen),
+  useSelectedPosture: () =>
+    useLocalStore((state) => state.details.selectedPosture),
+  useSetSelectedPosture: () =>
+    useLocalStore((state) => state.details.setSelectedPosture),
+};

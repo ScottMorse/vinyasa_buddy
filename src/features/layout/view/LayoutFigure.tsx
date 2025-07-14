@@ -7,7 +7,7 @@ import { StickFigure } from '@/features/stickFigure/view/StickFigure';
 import { Button, HStack, Icon, IconButton, Stack } from '@chakra-ui/react';
 import {
   useCurrentSequenceItem,
-  useSequenceNavigationItems,
+  useSequenceNavigation,
 } from '@/features/sequence';
 import { getPosture } from '@/features/posture';
 import { HiddenField } from '@/features/hide/view';
@@ -18,7 +18,7 @@ export const LayoutFigure = () => {
   const hideOptions = useHideOptions();
   const windowWidth = useWindowWidth();
 
-  const { next, prev } = useSequenceNavigationItems();
+  const { next, prev } = useSequenceNavigation();
 
   const setSequenceIndex = useSetSequenceIndex();
 

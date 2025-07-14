@@ -56,7 +56,7 @@ export const useCurrentSequenceItem = () => {
     : null;
 };
 
-export const useSequenceNavigationItems = () => {
+export const useSequenceNavigation = () => {
   const flatSequence = useFlatSequence();
   const sequenceIndex = useSequenceIndex();
 

@@ -1,1 +1,1 @@
-export * from './postures';
+export * from './data/postures';

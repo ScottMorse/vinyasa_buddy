@@ -5,7 +5,9 @@ export interface PostureMetadata {
   name: string;
   sanskritName: string;
   cues: string[];
-  adjustments: string[];
+  transitionalCues?: string[];
+  assists: string[];
+  modifications: string[];
   stickFigurePosition: Partial<StickFigurePosition>;
   transitionOnly?: boolean;
 }
@@ -16,7 +18,9 @@ const POSTURE_MAP = {
     name: "Child's Pose",
     sanskritName: 'Bālāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: 20,
@@ -61,7 +65,9 @@ const POSTURE_MAP = {
     name: 'Tabletop',
     sanskritName: 'Cakravākāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 90,
@@ -82,7 +88,9 @@ const POSTURE_MAP = {
     name: 'Cat',
     sanskritName: 'Mārjarīāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       neck: {
         chestAngle: 20,
@@ -112,7 +120,9 @@ const POSTURE_MAP = {
     name: 'Cow',
     sanskritName: 'Biḍālāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       neck: {
         chestAngle: -15,
@@ -142,7 +152,9 @@ const POSTURE_MAP = {
     name: 'Downward Facing Dog',
     sanskritName: 'Adho Mukha Svanāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 137,
@@ -172,7 +184,9 @@ const POSTURE_MAP = {
     name: 'Gaze Forward',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     transitionOnly: true,
     stickFigurePosition: {
       abdomen: {
@@ -203,7 +217,9 @@ const POSTURE_MAP = {
     name: 'Ragdoll (Forward Fold Variation)',
     sanskritName: 'Uttānāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       neck: {
         chestAngle: 25,
@@ -242,7 +258,9 @@ const POSTURE_MAP = {
     name: 'Roll up the Spine',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     transitionOnly: true,
     stickFigurePosition: {
       neck: {
@@ -282,7 +300,9 @@ const POSTURE_MAP = {
     name: 'Mountain',
     sanskritName: 'Tāḍāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       rightUpperArm: {
         shoulderAngle: 80,
@@ -303,7 +323,9 @@ const POSTURE_MAP = {
     name: 'Extended Mountain',
     sanskritName: 'Ūrdhva Hastāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       rightUpperArm: {
         shoulderAngle: -40,
@@ -324,7 +346,9 @@ const POSTURE_MAP = {
     name: 'Standing At Attention',
     sanskritName: 'Samasthiti',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       rightUpperArm: {
         shoulderAngle: 45,
@@ -345,7 +369,9 @@ const POSTURE_MAP = {
     name: 'Forward Fold',
     sanskritName: 'Uttānāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       neck: {
         chestAngle: 25,
@@ -384,7 +410,9 @@ const POSTURE_MAP = {
     name: 'Halfway Lift',
     sanskritName: 'Ardha Uttānāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 90,
@@ -423,7 +451,9 @@ const POSTURE_MAP = {
     name: 'Plank',
     sanskritName: 'Kumbhakasana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 80,
@@ -456,7 +486,9 @@ const POSTURE_MAP = {
     name: 'Plank to Low Plank',
     sanskritName: 'Chaturanga',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 90,
@@ -492,7 +524,9 @@ const POSTURE_MAP = {
     name: 'Lower to Belly',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 90,
@@ -528,7 +562,9 @@ const POSTURE_MAP = {
     name: 'Cobra',
     sanskritName: 'Bhujaṅgāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       neck: {
         chestAngle: -10,
@@ -570,7 +606,9 @@ const POSTURE_MAP = {
     name: 'Upward Facing Dog',
     sanskritName: 'Ūrdhva Mukha Śvanāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       neck: {
         chestAngle: -10,
@@ -606,7 +644,9 @@ const POSTURE_MAP = {
     name: 'Chair',
     sanskritName: 'Utkaṭāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 30,
@@ -642,7 +682,9 @@ const POSTURE_MAP = {
     name: 'Three-Legged Down Dog',
     sanskritName: 'Eka Pāda Adho Mukha Śvānāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 137,
@@ -675,7 +717,9 @@ const POSTURE_MAP = {
     name: 'Extend leg, Square Hips (3-Legged Dog)',
     sanskritName: 'Eka Pāda Adho Mukha Śvānāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     transitionOnly: true,
     stickFigurePosition: {
       abdomen: {
@@ -709,7 +753,9 @@ const POSTURE_MAP = {
     name: 'Lunge',
     sanskritName: 'Āñjaneyāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 80,
@@ -748,7 +794,9 @@ const POSTURE_MAP = {
     name: 'Warrior 2',
     sanskritName: 'Vīrabhadrāsana II',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       leftUpperLeg: {
         hipAngle: 70,
@@ -766,7 +814,9 @@ const POSTURE_MAP = {
     name: 'Warrior 2 (Sink Down)',
     sanskritName: 'Vīrabhadrāsana II',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       leftUpperLeg: {
         hipAngle: 80,
@@ -784,7 +834,9 @@ const POSTURE_MAP = {
     name: 'Warrior 2 (Reach Forward)',
     sanskritName: 'Vīrabhadrāsana II',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     transitionOnly: true,
     stickFigurePosition: {
       neck: {
@@ -818,7 +870,9 @@ const POSTURE_MAP = {
     name: 'Straighten Knee',
     sanskritName: 'Vīrabhadrāsana II',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       leftUpperLeg: {
         hipAngle: 50,
@@ -836,7 +890,9 @@ const POSTURE_MAP = {
     name: 'Reach Forward',
     sanskritName: 'Vīrabhadrāsana II',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       neck: {
         chestAngle: -5,
@@ -870,7 +926,9 @@ const POSTURE_MAP = {
     name: 'Extended Side Angle',
     sanskritName: 'Utthita Pārśvakoṇāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     transitionOnly: true,
     stickFigurePosition: {
       abdomen: {
@@ -898,7 +956,9 @@ const POSTURE_MAP = {
     name: 'Reverse Warrior',
     sanskritName: 'Viparīta Vīrabhadrāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     transitionOnly: true,
     stickFigurePosition: {
       neck: {
@@ -935,7 +995,9 @@ const POSTURE_MAP = {
     name: 'Reclined Bound Angle Sit Ups',
     sanskritName: 'Supta Baddha Koṇāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: -10,
@@ -980,7 +1042,9 @@ const POSTURE_MAP = {
     name: 'Bicycles',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: -10,
@@ -1025,7 +1089,9 @@ const POSTURE_MAP = {
     name: 'Boat',
     sanskritName: 'Nāvāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: -10,
@@ -1070,7 +1136,9 @@ const POSTURE_MAP = {
     name: 'Bridge',
     sanskritName: 'Setu Bandha Sarvāṅgāsana/Setu Bandhāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: -50,
@@ -1115,7 +1183,9 @@ const POSTURE_MAP = {
     name: 'Crescent Lunge',
     sanskritName: 'Āñjaneyāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       leftUpperLeg: {
         hipAngle: 70,
@@ -1148,7 +1218,9 @@ const POSTURE_MAP = {
     name: 'Crescent Lunge Prayer Hands',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       leftUpperLeg: {
         hipAngle: 70,
@@ -1182,7 +1254,9 @@ const POSTURE_MAP = {
     name: 'Lengthen Torso Forward',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 20,
@@ -1218,7 +1292,9 @@ const POSTURE_MAP = {
     name: 'Revolved Crescent Lunge',
     sanskritName: 'Parivṛtta Āñjaneyāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 80,
@@ -1254,7 +1330,9 @@ const POSTURE_MAP = {
     name: 'Lizard Lunge',
     sanskritName: 'Utthan Pristhasana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       chest: {
         abdomenAngle: 2,
@@ -1293,7 +1371,9 @@ const POSTURE_MAP = {
     name: 'Side Plank',
     sanskritName: 'Vasiṣṭhāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 70,
@@ -1329,7 +1409,9 @@ const POSTURE_MAP = {
     name: 'Eagle',
     sanskritName: 'Garuḍāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 20,
@@ -1365,7 +1447,9 @@ const POSTURE_MAP = {
     name: 'Gorilla',
     sanskritName: 'Pādahastāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       neck: {
         chestAngle: 25,
@@ -1408,7 +1492,9 @@ const POSTURE_MAP = {
     name: 'Crow',
     sanskritName: 'Bakāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 90,
@@ -1444,7 +1530,9 @@ const POSTURE_MAP = {
     name: 'Triangle',
     sanskritName: 'Utthita Trikoṇāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 30,
@@ -1471,7 +1559,9 @@ const POSTURE_MAP = {
     name: 'Lift torso, Rotate front foot',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     transitionOnly: true,
     stickFigurePosition: {
       abdomen: {
@@ -1499,7 +1589,9 @@ const POSTURE_MAP = {
     name: 'Wide Legged Forward Fold',
     sanskritName: 'Prasarita',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 180,
@@ -1526,7 +1618,9 @@ const POSTURE_MAP = {
     name: 'Lift torso, adjust feet',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     transitionOnly: true,
     stickFigurePosition: {
       abdomen: {
@@ -1560,7 +1654,9 @@ const POSTURE_MAP = {
     name: 'Goddess',
     sanskritName: 'Utkata Konasana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       leftUpperLeg: {
         hipAngle: 80,
@@ -1593,7 +1689,9 @@ const POSTURE_MAP = {
     name: 'Lift torso, adjust feet',
     sanskritName: 'Utkata Konasana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     transitionOnly: true,
     stickFigurePosition: {
       leftUpperLeg: {
@@ -1627,7 +1725,9 @@ const POSTURE_MAP = {
     name: 'Camel',
     sanskritName: 'Uṣtrāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       chest: {
         abdomenAngle: -5,
@@ -1660,7 +1760,9 @@ const POSTURE_MAP = {
     name: 'Bend Knee, Stack Hips',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       abdomen: {
         hipAngle: 140,
@@ -1693,7 +1795,9 @@ const POSTURE_MAP = {
     name: 'Half Pigeon',
     sanskritName: 'Eka Pāda Kapotāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: 30,
@@ -1735,7 +1839,9 @@ const POSTURE_MAP = {
     name: 'Locust',
     sanskritName: 'Śalabhāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       chest: {
         abdomenAngle: -10,
@@ -1774,7 +1880,9 @@ const POSTURE_MAP = {
     name: 'Seated Forward Fold',
     sanskritName: 'Paścimottānāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: 5,
@@ -1819,7 +1927,9 @@ const POSTURE_MAP = {
     name: 'Staff',
     sanskritName: 'Dandasana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: -5,
@@ -1855,7 +1965,9 @@ const POSTURE_MAP = {
     name: 'Lift Torso',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: -5,
@@ -1891,7 +2003,9 @@ const POSTURE_MAP = {
     name: 'Happy Baby',
     sanskritName: 'Ānanda Bālāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: 60,
@@ -1924,7 +2038,9 @@ const POSTURE_MAP = {
     name: 'Supine Twist',
     sanskritName: 'Jaṭhara Parivartanasana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: 60,
@@ -1960,7 +2076,9 @@ const POSTURE_MAP = {
     name: 'Knees Center',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     transitionOnly: true,
     stickFigurePosition: {
       head: {
@@ -1994,7 +2112,9 @@ const POSTURE_MAP = {
     name: 'Lower to Back',
     sanskritName: '',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: 10,
@@ -2027,7 +2147,9 @@ const POSTURE_MAP = {
     name: 'Corpse',
     sanskritName: 'Śavāsana',
     cues: [],
-    adjustments: [],
+    assists: [],
+    transitionalCues: [],
+    modifications: [],
     stickFigurePosition: {
       head: {
         neckAngle: 10,
@@ -2059,6 +2181,8 @@ const POSTURE_MAP = {
 
 export const getPosture = (id: PostureId | undefined | null) =>
   id ? POSTURE_MAP[id] : null;
+
+export const ALL_POSTURES = Object.values(POSTURE_MAP);
 
 export type PostureId = keyof typeof POSTURE_MAP;
 
