@@ -123,11 +123,12 @@ export const PostureDetails = () => {
         top="0"
         bgColor="background"
         zIndex="1"
+        mb="0.5rem"
       >
         <SequenceNavigationButton
           direction="prev"
-          py={{ base: '2.25rem', md: '2.5rem' }}
-          px={{ base: '1.5rem', md: '1.65rem' }}
+          py={{ base: '1.75rem', md: '2.5rem' }}
+          px={{ base: '1rem', md: '1.65rem' }}
         />
         <Stack textAlign="center">
           <Text
@@ -143,8 +144,8 @@ export const PostureDetails = () => {
         </Stack>
         <SequenceNavigationButton
           direction="next"
-          py={{ base: '2.25rem', md: '2.5rem' }}
-          px={{ base: '1.5rem', md: '1.65rem' }}
+          py={{ base: '1.75rem', md: '2.5rem' }}
+          px={{ base: '1rem', md: '1.65rem' }}
         />
       </HStack>
       <Stack justify="space-between" align="center" w="100%" flex={1}>

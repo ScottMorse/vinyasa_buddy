@@ -26,7 +26,7 @@ export const PostureDetailsModal = () => {
         maxW="min(90vw, 90rem)"
         minH="min(90dvh, 90rem)"
         maxH="min(90dvh, 90rem)"
-        pt="5.5rem"
+        pt="4.75rem"
       >
         <Dialog.CloseTrigger />
         <PostureDetails />
