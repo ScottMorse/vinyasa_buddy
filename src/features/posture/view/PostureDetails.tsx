@@ -112,6 +112,7 @@ export const PostureDetails = () => {
       flex={1}
       maxH="100%"
       overflowY="auto"
+      mt="-0.5rem"
     >
       <HStack
         gap="2rem"
@@ -119,8 +120,11 @@ export const PostureDetails = () => {
         justify="space-between"
         align="flex-start"
         position="sticky"
-        pb="1rem"
-        top="0"
+        transform="translateZ(0)"
+        backfaceVisibility="hidden"
+        willChange="transform, backface-visibility"
+        py="1rem"
+        top="-1rem"
         bgColor="background"
         zIndex="1"
         mb="0.5rem"
