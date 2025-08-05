@@ -992,7 +992,7 @@ export const SEQUENCE_GROUP_MAP = {
         breath: 'Exhale',
       },
       {
-        posture: 'wideForwardFoldLift',
+        posture: 'fivePointedStar',
         duration: '',
         breath: 'Inhale',
       },
@@ -1059,7 +1059,7 @@ export const SEQUENCE_GROUP_MAP = {
         breath: 'Exhale',
       },
       {
-        posture: 'goddessLifted',
+        posture: 'fivePointedStar',
         duration: '',
         breath: 'Inhale',
       },

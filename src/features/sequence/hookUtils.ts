@@ -4,7 +4,7 @@ import {
   type SequenceGroup,
   type SequenceGroupId,
   type SequenceItem,
-} from './sequence';
+} from './data/sequence';
 import { useSequenceIndex, useSetSequenceIndex } from '../store/store';
 
 type FlatSequenceItem = SequenceItem & {

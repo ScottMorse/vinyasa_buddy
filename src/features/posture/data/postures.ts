@@ -1953,9 +1953,9 @@ const POSTURE_MAP = {
       },
     },
   },
-  wideForwardFoldLift: {
-    id: 'wideForwardFoldLift',
-    name: 'Lift torso, adjust feet',
+  fivePointedStar: {
+    id: 'fivePointedStar',
+    name: 'Five Pointed Star',
     sanskritName: '',
     cues: [],
     assists: [],
@@ -1964,13 +1964,13 @@ const POSTURE_MAP = {
     transitionOnly: true,
     stickFigurePosition: {
       abdomen: {
-        hipAngle: 180,
+        hipAngle: 0,
       },
       chest: {
-        abdomenAngle: 180,
+        abdomenAngle: 0,
       },
       neck: {
-        chestAngle: 180,
+        chestAngle: 0,
       },
       leftUpperLeg: {
         hipAngle: 40,
@@ -1982,10 +1982,10 @@ const POSTURE_MAP = {
         kneeAngle: 2,
       },
       leftUpperArm: {
-        shoulderAngle: 90,
+        shoulderAngle: -45,
       },
       rightUpperArm: {
-        shoulderAngle: 90,
+        shoulderAngle: -45,
       },
     },
   },
@@ -2038,42 +2038,6 @@ const POSTURE_MAP = {
       },
       leftLowerArm: {
         elbowAngle: -150,
-      },
-    },
-  },
-  goddessLifted: {
-    id: 'goddessLifted',
-    name: 'Lift torso, adjust feet',
-    sanskritName: 'Utkata Konasana',
-    cues: [],
-    assists: [],
-    transitionalCues: [],
-    modifications: [],
-    transitionOnly: true,
-    stickFigurePosition: {
-      leftUpperLeg: {
-        hipAngle: 60,
-      },
-      rightUpperLeg: {
-        hipAngle: 60,
-      },
-      leftLowerLeg: {
-        kneeAngle: 60,
-      },
-      rightLowerLeg: {
-        kneeAngle: 60,
-      },
-      rightUpperArm: {
-        shoulderAngle: 30,
-      },
-      rightLowerArm: {
-        elbowAngle: -170,
-      },
-      leftUpperArm: {
-        shoulderAngle: 30,
-      },
-      leftLowerArm: {
-        elbowAngle: -170,
       },
     },
   },
