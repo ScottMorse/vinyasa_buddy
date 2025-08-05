@@ -84,21 +84,33 @@ export const PostureDetails = () => {
         justify="space-between"
         align="flex-start"
         position="sticky"
-        pb="2rem"
+        pb="1rem"
         top="0"
         bgColor="background"
         zIndex="1"
       >
-        <SequenceNavigationButton direction="prev" />
+        <SequenceNavigationButton
+          direction="prev"
+          py={{ base: '2.25rem', md: '2.5rem' }}
+          px={{ base: '1.5rem', md: '1.65rem' }}
+        />
         <Stack textAlign="center">
-          <Text color="secondary" fontWeight="bold" fontSize="2rem">
+          <Text
+            color="secondary"
+            fontWeight="bold"
+            fontSize={{ base: '1.6rem', md: '2rem' }}
+          >
             {currentPosture?.name}
           </Text>
-          <Text color="primary" fontSize="2rem">
+          <Text color="primary" fontSize={{ base: '1.6rem', md: '2rem' }}>
             {currentPosture?.sanskritName}
           </Text>
         </Stack>
-        <SequenceNavigationButton direction="next" />
+        <SequenceNavigationButton
+          direction="next"
+          py={{ base: '2.25rem', md: '2.5rem' }}
+          px={{ base: '1.5rem', md: '1.65rem' }}
+        />
       </HStack>
       <Stack justify="space-between" align="center" w="100%" flex={1}>
         <Stack
