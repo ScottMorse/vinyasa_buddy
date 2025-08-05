@@ -1,4 +1,5 @@
 import {
+  Box,
   type BoxProps,
   HStack,
   Icon,
@@ -48,7 +49,7 @@ const ItemList = ({
   );
   return (
     <Accordion.Root collapsible defaultValue={[id + title]}>
-      <Accordion.Item value={id + title} borderColor="textDisabled">
+      <Accordion.Item value={id + title} borderColor={iconColor}>
         {items.length ? (
           <>
             {' '}
@@ -57,7 +58,10 @@ const ItemList = ({
               {items.length ? (
                 items.map((item) => (
                   <Text key={id + item} fontSize="1.8rem">
-                    • {item}
+                    <Box as="span" color={iconColor}>
+                      •{' '}
+                    </Box>
+                    {item}
                   </Text>
                 ))
               ) : (
@@ -180,7 +184,7 @@ export const PostureDetails = () => {
               borderColor="textDisabled"
               w="90%"
             />
-            <Stack gap="1.5rem">
+            <Stack gap="1.5rem" w="100%">
               <Text textAlign="center" color="secondary">
                 <Text as="span" fontStyle="italic">
                   Next:
