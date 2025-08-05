@@ -4,7 +4,7 @@ import {
   useSequenceGroups,
   useSetSequenceFromGroupId,
 } from '../../hookUtils';
-import type { SequenceGroupId } from '../../sequence';
+import type { SequenceGroupId } from '../../data/sequence';
 import { useHideOptions } from '@/features/store';
 import { HiddenField } from '@/features/hide/view';
 

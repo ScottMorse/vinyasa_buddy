@@ -4,7 +4,7 @@ import {
   type SequenceGroup,
   type SequenceGroupId,
   type SequenceItem,
-} from './sequence';
+} from './data/sequence';
 import { useSequenceIndex, useSetSequenceIndex } from '../store/store';
 
 type FlatSequenceItem = SequenceItem & {
@@ -56,7 +56,15 @@ export const useCurrentSequenceItem = () => {
     : null;
 };
 
-export const useSequenceNavigationItems = () => {
+export const useNextSequenceItem = () => {
+  const flatSequence = useFlatSequence();
+  const sequenceIndex = useSequenceIndex();
+  return sequenceIndex !== null && sequenceIndex < flatSequence.length - 1
+    ? flatSequence[sequenceIndex + 1]
+    : null;
+};
+
+export const useSequenceNavigation = () => {
   const flatSequence = useFlatSequence();
   const sequenceIndex = useSequenceIndex();
 

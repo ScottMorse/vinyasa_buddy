@@ -1,11 +1,9 @@
 import { Stack } from '@chakra-ui/react';
 import { useWindowWidth } from '../useWindowWidth';
-import {
-  SequenceControls,
-  useSequenceNavigationItems,
-} from '@/features/sequence';
+import { SequenceControls, useSequenceNavigation } from '@/features/sequence';
 import { useSetSequenceIndex } from '@/features/store';
 import { lazyNamedImport } from '@/utils/lazy';
+import { PostureDetailsModal } from '@/features/posture/view/PostureDetailsModal';
 
 const { LayoutDisclaimer } = lazyNamedImport(
   () => import('./LayoutDisclaimer'),
@@ -35,7 +33,7 @@ const { HideControls } = lazyNamedImport(
 export const Layout = () => {
   useWindowWidth();
 
-  const { next, prev } = useSequenceNavigationItems();
+  const { next, prev } = useSequenceNavigation();
   const setSequenceIndex = useSetSequenceIndex();
 
   return (
@@ -55,6 +53,7 @@ export const Layout = () => {
       <LayoutDisclaimer />
       <LayoutHeader />
       <SequenceControls />
+      <PostureDetailsModal />
       <Stack mt="3rem" mb={{ base: '-3rem', md: '-8rem' }}>
         <LayoutPosture />
       </Stack>

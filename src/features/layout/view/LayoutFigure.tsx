@@ -7,40 +7,29 @@ import { StickFigure } from '@/features/stickFigure/view/StickFigure';
 import { Button, HStack, Icon, IconButton, Stack } from '@chakra-ui/react';
 import {
   useCurrentSequenceItem,
-  useSequenceNavigationItems,
+  useSequenceNavigation,
 } from '@/features/sequence';
 import { getPosture } from '@/features/posture';
 import { HiddenField } from '@/features/hide/view';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { SequenceNavigationButton } from '@/features/sequence/view/controls/SequenceNavigationButton';
 
 export const LayoutFigure = () => {
   const sequenceItem = useCurrentSequenceItem();
   const hideOptions = useHideOptions();
   const windowWidth = useWindowWidth();
 
-  const { next, prev } = useSequenceNavigationItems();
-
-  const setSequenceIndex = useSetSequenceIndex();
-
   return (
     <Stack align="center" justify="center" position="relative" zIndex={0}>
       <HStack justify="space-between" w="100%" position="relative">
-        <Button
-          color="secondary"
-          fontWeight="bold"
+        <SequenceNavigationButton
+          direction="prev"
           position="absolute"
+          left={{ base: '-3rem', sm: '0rem', md: '-2rem' }}
           py={{ base: '2.25rem', md: '2.5rem' }}
           px={{ base: '1.5rem', md: '1.65rem' }}
-          variant="outline"
-          opacity={prev ? 1 : 0}
-          left={{ base: '-3rem', sm: '0rem', md: '-2rem' }}
-          disabled={!prev}
-          onClick={() => prev && setSequenceIndex(prev.index)}
           zIndex={1}
-          aria-label="Previous posture"
-        >
-          <Icon width="1.75rem" height="1.75rem" as={FaArrowLeft} />
-        </Button>
+        />
         <HiddenField
           isHidden={hideOptions.vinyasaBuddy}
           fieldName="Vinyasa Buddy"
@@ -62,24 +51,14 @@ export const LayoutFigure = () => {
             }}
           />
         </HiddenField>
-        {next && (
-          <Button
-            color="secondary"
-            fontWeight="bold"
-            variant="outline"
-            opacity={next ? 1 : 0}
-            disabled={!next}
-            py={{ base: '2.25rem', md: '2.5rem' }}
-            px={{ base: '1.5rem', sm: '1.65rem' }}
-            onClick={() => next && setSequenceIndex(next.index)}
-            zIndex={1}
-            position="absolute"
-            right={{ base: '-3rem', sm: '0rem', md: '-2rem' }}
-            aria-label="Next posture"
-          >
-            <Icon width="1.75rem" height="1.75rem" as={FaArrowRight} />
-          </Button>
-        )}
+        <SequenceNavigationButton
+          direction="next"
+          position="absolute"
+          right={{ base: '-3rem', sm: '0rem', md: '-2rem' }}
+          py={{ base: '2.25rem', md: '2.5rem' }}
+          px={{ base: '1.5rem', md: '1.65rem' }}
+          zIndex={1}
+        />
       </HStack>
     </Stack>
   );
