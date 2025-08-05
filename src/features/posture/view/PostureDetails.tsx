@@ -123,7 +123,6 @@ export const PostureDetails = () => {
         transform="translateZ(0)"
         backfaceVisibility="hidden"
         willChange="transform, backface-visibility"
-        contain="strict"
         py="1rem"
         top="-1rem"
         bgColor="background"
