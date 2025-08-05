@@ -139,8 +139,6 @@ export const PostureDetails = () => {
             w="100%"
             align="center"
             gap="2rem"
-            position="sticky"
-            bottom="0"
             bgColor="background"
             zIndex="1"
             maxW="min(95%, 45rem)"
