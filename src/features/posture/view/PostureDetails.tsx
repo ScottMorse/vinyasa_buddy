@@ -193,9 +193,6 @@ export const PostureDetails = () => {
             zIndex="1"
             maxW="min(95%, 45rem)"
           >
-            <Stack w="100%" position="absolute" maxW="100%" overflow="hidden">
-              <Separator borderColor="textDisabled" w="200%" />
-            </Stack>
             <Stack gap="1.5rem" w="100%" pt="2rem">
               <Text textAlign="center" color="secondary">
                 <Text as="span" fontStyle="italic">
