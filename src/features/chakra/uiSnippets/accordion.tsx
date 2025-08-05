@@ -10,7 +10,7 @@ export const AccordionItemTrigger = React.forwardRef<
   HTMLButtonElement,
   AccordionItemTriggerProps
 >(function AccordionItemTrigger(props, ref) {
-  const { children, indicatorPlacement = 'end', ...rest } = props;
+  const { children, indicatorPlacement = 'end', color, ...rest } = props;
   return (
     <ChakraAccordion.ItemTrigger cursor="pointer" {...rest} ref={ref}>
       {indicatorPlacement === 'start' && (
@@ -24,7 +24,7 @@ export const AccordionItemTrigger = React.forwardRef<
         {children}
       </HStack>
       {indicatorPlacement === 'end' && (
-        <ChakraAccordion.ItemIndicator>
+        <ChakraAccordion.ItemIndicator color={color}>
           <LuChevronDown />
         </ChakraAccordion.ItemIndicator>
       )}

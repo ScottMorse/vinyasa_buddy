@@ -27,11 +27,13 @@ const ItemList = ({
   title,
   icon,
   iconColor,
+  withBottomBorder,
 }: {
   items: string[];
   title: string;
   icon: React.ElementType;
   iconColor?: BoxProps['color'];
+  withBottomBorder?: boolean;
 }) => {
   const id = useId();
   const renderedTitle = (
@@ -49,12 +51,21 @@ const ItemList = ({
   );
   return (
     <Accordion.Root collapsible defaultValue={[id + title]}>
-      <Accordion.Item value={id + title} borderColor={iconColor}>
+      <Accordion.Item
+        value={id + title}
+        borderColor={withBottomBorder ? iconColor : 'transparent'}
+      >
         {items.length ? (
           <>
             {' '}
-            <Accordion.ItemTrigger>{renderedTitle}</Accordion.ItemTrigger>
-            <Accordion.ItemContent>
+            <Accordion.ItemTrigger color={iconColor}>
+              {renderedTitle}
+            </Accordion.ItemTrigger>
+            <Accordion.ItemContent
+              display="flex"
+              flexDirection="column"
+              gap="0.5rem"
+            >
               {items.length ? (
                 items.map((item) => (
                   <Text key={id + item} fontSize="1.8rem">
@@ -100,7 +111,7 @@ export const PostureDetails = () => {
       boxSizing="content-box"
       flex={1}
       maxH="100%"
-      overflowY="scroll"
+      overflowY="auto"
     >
       <HStack
         gap="2rem"
@@ -149,25 +160,28 @@ export const PostureDetails = () => {
             title="Transitional cues:"
             icon={FaPersonWalkingArrowRight}
             iconColor="stickRightLowerLeg"
+            withBottomBorder
           />
           <ItemList
             items={currentPosture?.cues ?? []}
             title="Cues:"
             icon={FaPersonHarassing}
             iconColor="secondary"
+            withBottomBorder
           />
           <ItemList
             items={currentPosture?.assists ?? []}
             title="Assists:"
             icon={FaPeoplePulling}
             iconColor="stickChest"
+            withBottomBorder
           />
-
           <ItemList
             items={currentPosture?.modifications ?? []}
             title="Modifications:"
             icon={FaCubes}
             iconColor="stickLeftUpperLeg"
+            withBottomBorder
           />
         </Stack>
         {nextPosture && (
@@ -179,12 +193,10 @@ export const PostureDetails = () => {
             zIndex="1"
             maxW="min(95%, 45rem)"
           >
-            <Separator
-              justifySelf="flex-end"
-              borderColor="textDisabled"
-              w="90%"
-            />
-            <Stack gap="1.5rem" w="100%">
+            <Stack w="100%" position="absolute" maxW="100%" overflow="hidden">
+              <Separator borderColor="textDisabled" w="200%" />
+            </Stack>
+            <Stack gap="1.5rem" w="100%" pt="2rem">
               <Text textAlign="center" color="secondary">
                 <Text as="span" fontStyle="italic">
                   Next:
@@ -197,7 +209,7 @@ export const PostureDetails = () => {
                 items={nextPosture?.transitionalCues ?? []}
                 title="Transitional cues:"
                 icon={FaPersonWalkingArrowRight}
-                iconColor="stickRightLowerLeg"
+                iconColor="primary"
               />
             </Stack>
           </Stack>
