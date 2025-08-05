@@ -11,7 +11,7 @@ export const PostureDetailsButton = () => {
       w="fit-content"
       bg="rgba(0, 0, 0, 0.06)"
       px="1rem"
-      py="2.25rem"
+      pt="2.5rem"
       pb="2.75rem"
       borderColor="backgroundSecondary"
     >
