@@ -56,6 +56,11 @@ const DialogCloseTrigger = React.forwardRef<
       position="absolute"
       top="2"
       insetEnd="2"
+      border="1px solid"
+      borderColor="textSecondary"
+      color="textSecondary"
+      minW="3rem"
+      minH="3rem"
       {...props}
       asChild
     >

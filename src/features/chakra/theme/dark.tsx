@@ -57,6 +57,7 @@ export const DARK_THEME = createSystem(
           textPrimary: { value: '#cdd6e5' },
           textContrast: { value: '#121212' },
           textSecondary: { value: '#98abca' },
+          textDisabled: { value: '#888' },
           stickHead: { value: '#FF8D85' },
           stickNeck: { value: '#FF8D85' },
           stickChest: { value: '#15d89a' },

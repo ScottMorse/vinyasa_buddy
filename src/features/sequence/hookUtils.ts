@@ -56,6 +56,14 @@ export const useCurrentSequenceItem = () => {
     : null;
 };
 
+export const useNextSequenceItem = () => {
+  const flatSequence = useFlatSequence();
+  const sequenceIndex = useSequenceIndex();
+  return sequenceIndex !== null && sequenceIndex < flatSequence.length - 1
+    ? flatSequence[sequenceIndex + 1]
+    : null;
+};
+
 export const useSequenceNavigation = () => {
   const flatSequence = useFlatSequence();
   const sequenceIndex = useSequenceIndex();

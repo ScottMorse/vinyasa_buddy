@@ -14,14 +14,10 @@ export interface HideOptions {
   duration: boolean;
 }
 
-interface StoreState {
+interface LocalStoreState {
   theme: {
     chakraSystem: SystemContext;
     setChakraSystem: (system: SystemContext) => void;
-  };
-  sequence: {
-    index: number | null;
-    setIndex: (index: number | null) => void;
   };
   disclaimer: {
     acceptedDisclaimer: boolean;
@@ -45,8 +41,10 @@ interface StoreState {
   };
 }
 
-type LocalStoreState = Omit<StoreState, 'sequence'>;
-type SessionStoreState = Pick<StoreState, 'sequence'>;
+export interface SessionStoreState {
+  sequenceIndex: number | null;
+  setSequenceIndex: (index: number | null) => void;
+}
 
 const useLocalStore = create<LocalStoreState>()(
   persist(
@@ -121,20 +119,16 @@ const useLocalStore = create<LocalStoreState>()(
 export const useSessionStore = create<SessionStoreState>()(
   persist(
     (set) => ({
-      sequence: {
-        index: null,
-        setIndex: (index) =>
-          set((state) => ({
-            sequence: { ...state.sequence, index },
-          })),
-      },
+      sequenceIndex: null,
+      setSequenceIndex: (index) =>
+        set((state) => ({
+          sequenceIndex: index,
+        })),
     }),
     {
       name: 'vb-session-store',
-      partialize: (state) => ({
-        sequence: {
-          index: state.sequence.index,
-        },
+      partialize: ({ sequenceIndex }) => ({
+        sequenceIndex,
       }),
       storage: createJSONStorage(() => sessionStorage),
     },
@@ -147,9 +141,9 @@ export const useSetChakraSystem = () =>
   useLocalStore((state) => state.theme.setChakraSystem);
 
 export const useSequenceIndex = () =>
-  useSessionStore((state) => state.sequence.index);
+  useSessionStore((state) => state.sequenceIndex);
 export const useSetSequenceIndex = () =>
-  useSessionStore((state) => state.sequence.setIndex);
+  useSessionStore((state) => state.setSequenceIndex);
 
 export const useAcceptedDisclaimer = () =>
   useLocalStore((state) => state.disclaimer.acceptedDisclaimer);
@@ -176,8 +170,4 @@ export const postureDetails = {
     useLocalStore((state) => state.details.isDetailsModalOpen),
   useSetIsModalOpen: () =>
     useLocalStore((state) => state.details.setIsDetailsModalOpen),
-  useSelectedPosture: () =>
-    useLocalStore((state) => state.details.selectedPosture),
-  useSetSelectedPosture: () =>
-    useLocalStore((state) => state.details.setSelectedPosture),
 };
