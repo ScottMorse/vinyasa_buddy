@@ -1,8 +1,12 @@
 import { Stack, HStack } from '@chakra-ui/react';
 import { SequenceControlGroup } from './SequenceControlGroup';
 import { SequenceControlStep } from './SequenceControlStep';
+import { PostureDetailsButton } from '@/features/posture/view/PostureDetailsButton';
+import { useCurrentSequenceItem } from '@/features/sequence';
 
 export const SequenceControls = () => {
+  const currentSequenceItem = useCurrentSequenceItem();
+
   return (
     <HStack
       w="fit-content"
@@ -12,7 +16,10 @@ export const SequenceControls = () => {
       px="1rem"
     >
       <SequenceControlGroup />
-      <SequenceControlStep />
+      <Stack align="flex-end" gap="0.75rem">
+        <SequenceControlStep />
+        {currentSequenceItem && <PostureDetailsButton />}
+      </Stack>
     </HStack>
   );
 };

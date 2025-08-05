@@ -17,8 +17,6 @@ export const SequenceNavigationButton = ({
   const { next, prev } = useSequenceNavigation();
   const setSequenceIndex = useSetSequenceIndex();
 
-  console.log({ setSequenceIndex });
-
   const navigationItem = direction === 'next' ? next : prev;
   const icon = direction === 'next' ? FaArrowRight : FaArrowLeft;
   const ariaLabel = direction === 'next' ? 'Next posture' : 'Previous posture';

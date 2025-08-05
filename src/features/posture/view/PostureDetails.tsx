@@ -38,8 +38,9 @@ const ItemList = ({
           as={icon}
           width="2.5rem"
           height="2.5rem"
-          ml="-1.75rem"
+          ml="-1.25rem"
           mr="0.25rem"
+          mb="0.25rem"
           color={iconColor}
         />{' '}
         {title}
@@ -75,7 +76,7 @@ export const PostureDetails = () => {
       boxSizing="content-box"
       flex={1}
       maxH="100%"
-      overflowY="auto"
+      overflowY="scroll"
     >
       <HStack
         gap="2rem"
@@ -99,8 +100,14 @@ export const PostureDetails = () => {
         </Stack>
         <SequenceNavigationButton direction="next" />
       </HStack>
-      <Stack justify="space-between" w="100%" flex={1}>
-        <Stack gap="2rem" w="100%" align="center" pb="2rem">
+      <Stack justify="space-between" align="center" w="100%" flex={1}>
+        <Stack
+          gap="2rem"
+          w="100%"
+          align="center"
+          pb="2rem"
+          maxW="min(95%, 45rem)"
+        >
           <ItemList
             items={currentPosture?.transitionalCues ?? []}
             title="Transitional cues:"
@@ -136,6 +143,7 @@ export const PostureDetails = () => {
             bottom="0"
             bgColor="background"
             zIndex="1"
+            maxW="min(95%, 45rem)"
           >
             <Separator
               justifySelf="flex-end"

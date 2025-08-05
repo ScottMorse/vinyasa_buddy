@@ -17,7 +17,7 @@ export const PostureDetailsModal = () => {
   return (
     <Dialog.Root
       open={isOpen}
-      // onOpenChange={({ open }) => setIsOpen(open)}
+      onOpenChange={({ open }) => setIsOpen(open)}
       placement="top"
     >
       <Dialog.Content

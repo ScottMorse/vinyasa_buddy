@@ -96,7 +96,7 @@ const useLocalStore = create<LocalStoreState>()(
           set((state) => ({
             details: { ...state.details, selectedPosture: posture },
           })),
-        isDetailsModalOpen: true,
+        isDetailsModalOpen: false,
         setIsDetailsModalOpen: (isOpen) =>
           set((state) => ({
             details: { ...state.details, isDetailsModalOpen: isOpen },
