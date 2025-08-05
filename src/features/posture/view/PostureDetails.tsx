@@ -26,10 +26,7 @@ export const PostureDetails = () => {
     <Stack>
       <Stack>
         <Text>{selectedPosture?.name}</Text>
-      </Stack>
-      <Stack>
         <Text>{selectedPosture?.sanskritName}</Text>
-        <Text>{selectedPosture?.name}</Text>
       </Stack>
     </Stack>
   );
