@@ -1,5 +1,4 @@
 import {
-  Box,
   type BoxProps,
   HStack,
   Icon,
@@ -19,6 +18,8 @@ import {
   FaPersonHarassing,
   FaPersonWalkingArrowRight,
 } from 'react-icons/fa6';
+import { Accordion } from '@/features/chakra/uiSnippets';
+import { useId } from 'react';
 
 const ItemList = ({
   items,
@@ -31,32 +32,51 @@ const ItemList = ({
   icon: React.ElementType;
   iconColor?: BoxProps['color'];
 }) => {
+  const id = useId();
+  const renderedTitle = (
+    <Text textAlign="center" fontWeight="bold" fontSize="1.8rem">
+      <Icon
+        as={icon}
+        width="2.5rem"
+        height="2.5rem"
+        mr="0.25rem"
+        mb="0.25rem"
+        color={iconColor}
+      />{' '}
+      {title}
+    </Text>
+  );
   return (
-    <Stack>
-      <Text textAlign="center" fontWeight="bold" fontSize="1.8rem">
-        <Icon
-          as={icon}
-          width="2.5rem"
-          height="2.5rem"
-          ml="-1.25rem"
-          mr="0.25rem"
-          mb="0.25rem"
-          color={iconColor}
-        />{' '}
-        {title}
-      </Text>
-      {items.length ? (
-        items.map((item) => (
-          <Text key={item} fontSize="1.8rem">
-            • {item}
-          </Text>
-        ))
-      ) : (
-        <Text color="textDisabled" textAlign="center">
-          None
-        </Text>
-      )}
-    </Stack>
+    <Accordion.Root collapsible defaultValue={[id + title]}>
+      <Accordion.Item value={id + title} borderColor="textDisabled">
+        {items.length ? (
+          <>
+            {' '}
+            <Accordion.ItemTrigger>{renderedTitle}</Accordion.ItemTrigger>
+            <Accordion.ItemContent>
+              {items.length ? (
+                items.map((item) => (
+                  <Text key={id + item} fontSize="1.8rem">
+                    • {item}
+                  </Text>
+                ))
+              ) : (
+                <Text color="textDisabled" textAlign="center">
+                  None
+                </Text>
+              )}
+            </Accordion.ItemContent>{' '}
+          </>
+        ) : (
+          <HStack gap="1rem" align="center" pb="0.5rem">
+            {renderedTitle}
+            <Text color="textDisabled" textAlign="center">
+              None
+            </Text>
+          </HStack>
+        )}
+      </Accordion.Item>
+    </Accordion.Root>
   );
 };
 
