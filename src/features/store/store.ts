@@ -87,7 +87,10 @@ const useLocalStore = create<LocalStoreState>()(
         },
         updateOptions: (options) =>
           set((state) => ({
-            hide: { ...state.hide, ...options },
+            hide: {
+              ...state.hide,
+              options: { ...state.hide.options, ...options },
+            },
           })),
       },
       details: {
@@ -110,7 +113,6 @@ const useLocalStore = create<LocalStoreState>()(
           acceptedDisclaimer: state.disclaimer.acceptedDisclaimer,
           disclaimerIgnored: state.disclaimer.disclaimerIgnored,
         },
-        hide: state.hide,
       }),
     },
   ),

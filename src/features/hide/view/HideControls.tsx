@@ -23,9 +23,9 @@ export const HideControls = () => {
         size="sm"
         px="0.75rem"
         py="1.75rem"
-        onClick={() =>
-          setHideOptions({ postureName: !hideOptions.postureName })
-        }
+        onClick={() => {
+          setHideOptions({ postureName: !hideOptions.postureName });
+        }}
       >
         <HideIcon isHidden={hideOptions.postureName} /> Posture Name
       </Button>
